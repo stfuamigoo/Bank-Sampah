@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#186eb9"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dashboard Nasabah"
+        android:layout_marginTop="10dp"
+        android:textColor="#fff"
+        android:fontFamily="@font/poppins_bold"
+        android:layout_marginLeft="30dp"
+        android:textSize="25dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+        <Button
+            android:id="@+id/btnsampahuser"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="120dp"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="90dp"
+            android:layout_marginEnd="104dp"
+            android:background="@drawable/datasampahlogo"/>
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Menu Sampah"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:fontFamily="@font/poppins_black"
+            android:id="@+id/text_menusampah"
+            android:layout_below="@id/btnsampahuser"
+            android:layout_marginLeft="110dp"/>
+
+        <Button
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:id="@+id/btnhistorisetoruser"
+            android:layout_below="@id/text_menusampah"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/historisetorlogo"/>
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="\t\t\tMenu \nHistori Setor"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:fontFamily="@font/poppins_black"
+            android:id="@+id/text_menuhistorisetor"
+            android:layout_below="@id/btnhistorisetoruser"
+            android:layout_marginLeft="35dp"/>
+
+        <Button
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:id="@+id/btnhistoritarikuser"
+            android:layout_toRightOf="@id/btnhistorisetoruser"
+            android:layout_below="@+id/text_menusampah"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/historitariklogo"/>
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="\t\t\tMenu \nHistori Tarik"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:fontFamily="@font/poppins_black"
+            android:id="@+id/text_menuhistoritarik"
+            android:layout_below="@id/btnhistoritarikuser"
+            android:layout_marginLeft="195dp"/>
+
+        <Button
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:id="@+id/btnprofileuser"
+            android:background="@drawable/userlogo"
+            android:layout_below="@id/text_menuhistoritarik"
+            android:layout_marginTop="140dp"
+            android:layout_marginLeft="250dp"/>
+    </RelativeLayout>
+</RelativeLayout>

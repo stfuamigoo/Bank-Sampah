@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Bank Sampah</string>
+    <string name="penjelasan_tertarik">Bank Sampah Muda Karya adalah organisasi peduli lingkungan yang berlokasi di Balai Warga Rw 001 Kelurahan Pondok Cabe Ilir kecamatan Pamulang Kota Tangerang Selatan. Selain bidang bank sampah kami juga berfokus pada pengelolaan sampah, seperti komposting berbasis sampah, kerajinan berbahan baku sampah, dan masih banyak lagi program yang kami kembangkan. Saat ini bank sampah muda karya melayani warga pondok cabe ilir khususnya RW.001 yang berjumlah lebih dari 100 kepala keluarga. Hal itu menunjukan bahwa warga masyarakat perumahan pondok cabe ilir sangat antusias dengan adanya program ini, dan tentu bank sampah muda karya mendapatkan perhatian khusus dari warga sekitar. Jika Anda berminat untuk bergabung, silahkan ikuti langkah berikut ini.</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_user">UserMainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_data_user">Data User</string>
+    <string name="menu_user_data_user">Data User</string>
+    <string name="menu_data_sampah">Data Sampah</string>
+    <string name="menu_user_data_sampah">Data Sampah</string>
+    <string name="menu_transaksi_setor">Transaksi Setor</string>
+    <string name="menu_transaksi_tarik">Transaksi Tarik</string>
+    <string name="menu_histori_tarik">Histori Setor</string>
+    <string name="menu_histori_setor">Histori Tarik</string>
+    <string name="menu_logout">Logout</string>
+
+    <string-array name="satuan">
+        <item>Kilogram</item>
+        <item>Liter</item>
+        <item>Pcs</item>
+    </string-array>
+
+    <string name="nik">NIK</string>
+    <string name="password">Password</string>
+    <string name="nama">Nama</string>
+    <string name="alamat">Alamat</string>
+    <string name="rt">RT</string>
+    <string name="telepon">Telepon</string>
+    <string name="email">Email</string>
+    <string name="saldo">Saldo</string>
+    <string name="role">Role</string>
+    <string name="tanggal_tarik">Tanggal Tarik</string>
+    <string name="jumlah_tarik">Jumlah Tarik</string>
+    <string name="keterangan">Keterangan</string>
+</resources>

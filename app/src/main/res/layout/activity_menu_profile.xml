@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Profile"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:background="#186eb9"
+            android:id="@+id/rvprofile">
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:id="@+id/logobanksampah"
+                android:src="@drawable/bg"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"/>
+        </RelativeLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_btn"
+            android:layout_below="@id/rvprofile"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Profile"
+            android:textColor="#fff"
+            android:fontFamily="@font/gotham_bold"
+            android:id="@+id/btn_profile"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_btn"
+            android:layout_below="@id/btn_profile"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="About"
+            android:textColor="#fff"
+            android:fontFamily="@font/gotham_bold"
+            android:id="@+id/btn_about"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_btn"
+            android:layout_below="@id/btn_about"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Contact"
+            android:textColor="#fff"
+            android:fontFamily="@font/gotham_bold"
+            android:id="@+id/btn_contact"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_btn_danger"
+            android:layout_below="@id/btn_contact"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Logout"
+            android:textColor="#fff"
+            android:fontFamily="@font/gotham_bold"
+            android:id="@+id/btn_logout"/>
+    </RelativeLayout>
+</LinearLayout>

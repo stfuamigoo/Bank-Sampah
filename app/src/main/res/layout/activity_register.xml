@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".Register">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NIK"
+            android:textColor="#a0a0a0"
+            android:id="@+id/tusername"
+            android:fontFamily="@font/nunitosans_semibold"
+            android:layout_marginTop="30dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Masukan NIK anda"
+            android:layout_below="@+id/tusername"
+            android:id="@+id/eusername"
+            android:fontFamily="@font/nunitosans_semibold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textColor="#a0a0a0"
+            android:id="@+id/tpassword"
+            android:layout_below="@+id/eusername"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunitosans_semibold"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tpassword"
+            android:id="@+id/epassword"
+            android:hint="Masukan Password anda"
+            android:inputType="textPassword"
+            android:fontFamily="@font/nunitosans_semibold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nama"
+            android:textColor="#a0a0a0"
+            android:id="@+id/tnama"
+            android:layout_below="@+id/epassword"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunitosans_semibold"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tnama"
+            android:id="@+id/enama"
+            android:hint="Masukan Nama anda"
+            android:fontFamily="@font/nunitosans_semibold"
+            android:inputType="text"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Alamat"
+            android:textColor="#a0a0a0"
+            android:id="@+id/talamat"
+            android:layout_below="@+id/enama"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunitosans_semibold"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/talamat"
+            android:id="@+id/ealamat"
+            android:inputType="text"
+            android:hint="Masukan Alamat anda"
+            android:fontFamily="@font/nunitosans_semibold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RT"
+            android:textColor="#a0a0a0"
+            android:id="@+id/trt"
+            android:layout_below="@+id/ealamat"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunitosans_semibold"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/trt"
+            android:id="@+id/ert"
+            android:hint="Masukan RT anda"
+            android:inputType="number"
+            android:fontFamily="@font/nunitosans_semibold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nomor Telepon"
+            android:textColor="#a0a0a0"
+            android:id="@+id/ttelepon"
+            android:layout_below="@+id/ert"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunitosans_semibold"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ttelepon"
+            android:id="@+id/etelepon"
+            android:hint="Masukan Nomor Telepon anda"
+            android:inputType="number"
+            android:fontFamily="@font/nunitosans_semibold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textColor="#a0a0a0"
+            android:id="@+id/temail"
+            android:layout_below="@+id/etelepon"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunitosans_semibold"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/temail"
+            android:id="@+id/eemail"
+            android:hint="Masukan Email anda"
+            android:inputType="text"
+            android:fontFamily="@font/nunitosans_semibold"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:id="@+id/esaldo"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:text="Nasabah"
+            android:id="@+id/erole"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/eemail"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/round_btn"
+            android:text="BUAT AKUN"
+            android:textColor="#fff"
+            android:id="@+id/btnbuatakun"
+            android:fontFamily="@font/gothammedium"
+            android:textSize="18sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n\n"
+            android:layout_below="@id/btnbuatakun"/>
+    </RelativeLayout>
+</ScrollView>
