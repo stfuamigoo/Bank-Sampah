@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.banksampah.ui.histori_setor.HistoriSetor;
 import com.example.banksampah.ui.histori_tarik.HistoriTarik;
-import com.example.banksampah.ui.sampah.UserSampah;
+import com.example.banksampah.ui.sampah.user.UserSampahMain;
 
 public class UserMainActivity extends AppCompatActivity {
     SessionManager manager;
@@ -31,7 +31,7 @@ public class UserMainActivity extends AppCompatActivity {
         btn_sampah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UserMainActivity.this, UserSampah.class);
+                Intent intent = new Intent(UserMainActivity.this, UserSampahMain.class);
                 startActivity(intent);
             }
         });

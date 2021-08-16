@@ -312,8 +312,6 @@ public class EditorSampah extends AppCompatActivity {
         }
     }
 
-
-
     void readMode(){
 
         mJenissampah.setFocusableInTouchMode(false);
@@ -330,12 +328,9 @@ public class EditorSampah extends AppCompatActivity {
     }
 
     private void editMode(){
-
         mJenissampah.setFocusableInTouchMode(true);
         mSatuan.setFocusableInTouchMode(true);
         mHarga.setFocusableInTouchMode(true);
         mKeterangan.setFocusableInTouchMode(true);
-
-
     }
 }

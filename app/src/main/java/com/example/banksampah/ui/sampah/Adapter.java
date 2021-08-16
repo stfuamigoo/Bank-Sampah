@@ -48,10 +48,6 @@ public class Adapter extends RecyclerView.Adapter<com.example.banksampah.ui.samp
         holder.mJenissampah.setText(sampah.get(position).getJenissampah());
         holder.mSatuan.setText(sampah.get(position).getSatuan());
         holder.mHarga.setText(sampah.get(position).getHarga());
-//        holder.mKeterangan.setText(sampah.get(position).getKeterangan());
-//        holder.mType.setText(sampah.get(position).getBreed() + " / "
-//                + sampah.get(position).getSpecies());
-//        holder.mDate.setText(sampah.get(position).getBirth());
 
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.skipMemoryCache(true);

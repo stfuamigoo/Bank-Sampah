@@ -8,7 +8,7 @@ $query = "SELECT * FROM sampah ORDER BY jenissampah DESC ";
 $result = mysqli_query($conn, $query);
 $response = array();
 
-$servername = '192.168.1.5';
+$servername = '192.168.1.6';
 
 while( $row = mysqli_fetch_assoc($result) ){
 
