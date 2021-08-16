@@ -1,8 +1,8 @@
 package com.example.banksampah;
 
 public class Config {
-    public static final String URL_LOGIN = "http://192.168.1.5/Bank-Sampah/backend/login.php";
-    public static final String URL_REGISTER = "http://192.168.1.5/Bank-Sampah/backend/register.php";
+    public static final String URL_LOGIN = "http://192.168.1.6/Bank-Sampah/backend/login.php";
+    public static final String URL_REGISTER = "http://192.168.1.6/Bank-Sampah/backend/register.php";
 
     public final static String TAG_NIK = "nik";
     public final static String TAG_ID_USER = "id";

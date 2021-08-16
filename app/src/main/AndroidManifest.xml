@@ -21,6 +21,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light"
         android:networkSecurityConfig="@xml/network_sequrity_config">
+        <activity android:name=".Home" />
+        <activity android:name=".Login" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Register" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity android:name=".ui.sampah.MainSampah"/>
         <activity android:name=".ui.sampah.TambahSampah" />
         <activity android:name=".ui.sampah.EditorSampah" />
@@ -30,25 +44,13 @@
         <activity android:name=".ui.transaksi_tarik.TambahTransaksiTarik"/>
         <activity android:name=".ui.transaksi_tarik.EditorTransaksiTarik"/>
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity android:name=".Login" />
-        <activity android:name=".Register" />
-        <activity android:name=".Home" />
-        <activity
             android:name=".UserMainActivity"
             android:label="@string/title_activity_user"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.sampah.user.UserSampahMain">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.sampah.user.UserSampahMain"/>
         <activity android:name=".ui.sampah.user.DetailSampah"/>
+        <activity android:name=".ui.histori_tarik.HistoriTarikMain"/>
+        <activity android:name=".ui.histori_tarik.DetailHistoriTarik"/>
         <activity android:name=".splashscreen">
 
         </activity>
