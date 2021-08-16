@@ -22,6 +22,10 @@
         android:theme="@style/AppTheme"
         android:networkSecurityConfig="@xml/network_sequrity_config">
         <activity android:name=".Home" />
+        <activity android:name=".Profile"/>
+        <activity android:name=".About"/>
+        <activity android:name=".Contact"/>
+        <activity android:name=".UserProfile"/>
         <activity android:name=".Login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

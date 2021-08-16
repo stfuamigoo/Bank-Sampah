@@ -1,0 +1,103 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context=".About">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/bgimg"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:background="@drawable/bg2"/>
+        <TextView
+            android:id="@+id/judul1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bank Sampah Muda Karya"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:textSize="20dp"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"/>
+        <TextView
+            android:id="@+id/judul2"
+            android:layout_below="@id/judul1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunitosans_regular"
+            android:text="Merubah sampah menjadi penghasilan tambahan Anda !!!"
+            android:textColor="#fff"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/judul4"
+            android:layout_below="@id/bgimg"
+            android:textColor="#000"
+            android:text="Hubungi kami di"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_bold"/>
+
+        <ImageView
+            android:layout_width="175dp"
+            android:layout_height="6sp"
+            android:background="@color/black"
+            android:layout_below="@id/bgimg"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40sp"
+            android:id="@+id/gambar2"/>
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/instagram"
+            android:layout_below="@id/gambar2"
+            android:layout_marginTop="37sp"
+            android:id="@+id/gambarig"
+            android:layout_marginLeft="30dp"/>
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/whatsapp"
+            android:layout_below="@id/gambarig"
+            android:layout_marginTop="37sp"
+            android:id="@+id/gambarwa"
+            android:layout_marginLeft="30dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/instagram"
+            android:layout_toRightOf="@id/gambarig"
+            android:layout_below="@id/gambar2"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="18dp"
+            android:id="@+id/ig"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nomorwa"
+            android:layout_toRightOf="@id/gambarwa"
+            android:layout_below="@id/ig"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="85dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="18dp"/>
+        
+    </RelativeLayout>
+</ScrollView>

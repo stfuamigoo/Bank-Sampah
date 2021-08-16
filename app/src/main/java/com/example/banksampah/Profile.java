@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class Profile extends AppCompatActivity {
     Button btn_profile, btn_contact, btn_about, btn_logout;
     SessionManager manager;
-    String getId;
+    String getId, sRole;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +29,7 @@ public class Profile extends AppCompatActivity {
         manager.checkloggin();
         HashMap<String, String> user = manager.getUserDetail();
         getId = user.get(manager.ID);
+        sRole = user.get(manager.ROLE);
 
         btn_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,5 +63,16 @@ public class Profile extends AppCompatActivity {
                         "Logout Berhasil", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (sRole.equals("Admin")) {
+            startActivity(new Intent(Profile.this, MainActivity.class));
+        } else {
+            startActivity(new Intent(Profile.this, UserMainActivity.class));
+        }
+        finish();
     }
 }

@@ -1,4 +1,4 @@
-package com.example.banksampah.ui.data_user;
+package com.example.banksampah;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
