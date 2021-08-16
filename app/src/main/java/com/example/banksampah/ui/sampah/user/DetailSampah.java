@@ -25,11 +25,6 @@ public class DetailSampah extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_sampah_detail);
 
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-
         mJenissampah = findViewById(R.id.jenissampah);
         mSatuan = findViewById(R.id.satuan);
         mHarga = findViewById(R.id.harga);
@@ -52,7 +47,7 @@ public class DetailSampah extends AppCompatActivity {
         if (id != 0) {
 
             readMode();
-            getSupportActionBar().setTitle("Edit " + jenissampah.toString());
+            getSupportActionBar().setTitle(jenissampah.toString());
 
             mJenissampah.setText(jenissampah);
             mSatuan.setText(satuan);
