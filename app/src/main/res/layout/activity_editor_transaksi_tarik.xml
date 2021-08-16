@@ -59,8 +59,7 @@
                 android:id="@+id/ett_tanggal_tarik"
                 android:hint="@string/tanggal_tarik"
                 android:fontFamily="@font/nunitosans_regular"
-                android:textColor="#000"
-                android:inputType="number"/>
+                android:textColor="#000"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -75,22 +74,23 @@
                 android:fontFamily="@font/gothammedium"
                 android:textSize="16sp"/>
 
-            <Spinner
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_below="@id/etttxt_nama"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:id="@+id/ett_spinnernama"
+                android:id="@+id/ett_nama_user"
                 android:hint="@string/nama"
-                android:fontFamily="@font/nunitosans_regular"/>
+                android:fontFamily="@font/nunitosans_regular"
+                android:enabled="false"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/etttxt_saldo"
                 android:text="@string/saldo"
-                android:layout_below="@id/ett_spinnernama"
+                android:layout_below="@id/ett_nama_user"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp"

@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class Profile extends AppCompatActivity {
     Button btn_profile, btn_contact, btn_about, btn_logout;
     SessionManager manager;
-    String getId, getRole;
+    String getId;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
