@@ -15,5 +15,5 @@
  define('DB','bsk09');
 
  //membuat koneksi dengan database
- $con = mysqli_connect(HOST,USER,PASS,DB) or die('Unable to Connect');
+ $conn = mysqli_connect(HOST,USER,PASS,DB) or die('Unable to Connect');
  ?>
