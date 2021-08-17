@@ -1,11 +1,11 @@
 package com.example.banksampah.ui.transaksi_tarik;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,33 +24,19 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.banksampah.R;
 import com.example.banksampah.ui.data_user.User;
-import com.example.banksampah.ui.sampah.Sampah;
-import com.example.banksampah.ui.sampah.TambahSampah;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import static android.R.layout.simple_spinner_item;
 
@@ -65,6 +51,7 @@ public class TambahTransaksiTarik extends AppCompatActivity implements AdapterVi
     Button btn_tambah;
     Context context;
     ApiInterface apiInterface;
+    com.example.banksampah.ui.data_user.ApiInterface apiInterfaceUser;
     DatePickerDialog picker;
     Calendar calendar;
     RequestQueue requestQueue;
@@ -88,6 +75,7 @@ public class TambahTransaksiTarik extends AppCompatActivity implements AdapterVi
 
         context = this;
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        apiInterfaceUser = com.example.banksampah.ui.data_user.ApiClient.getApiClient().create(com.example.banksampah.ui.data_user.ApiInterface.class);
 
         et_tanggal_tarik.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +97,19 @@ public class TambahTransaksiTarik extends AppCompatActivity implements AdapterVi
         btn_tambah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveData("insert");
+                String tanggal_tarik = et_tanggal_tarik.getText().toString().trim();
+                String jumlah_tarik = et_jumlah_tarik.getText().toString().trim();
+                String keterangan = et_keterangan.getText().toString().trim();
+
+                if (tanggal_tarik.isEmpty()) {
+                    et_tanggal_tarik.setError("Tanggal Tidak Boleh Kosong");
+                } else if (jumlah_tarik.isEmpty()) {
+                    et_jumlah_tarik.setError("Jumlah Tidak Boleh Kosong");
+                } else if (keterangan.isEmpty()) {
+                    et_keterangan.setError("Keterangan Boleh Kosong");
+                } else {
+                    saveData("insert");
+                }
             }
         });
 
@@ -122,40 +122,85 @@ public class TambahTransaksiTarik extends AppCompatActivity implements AdapterVi
         progressDialog.show();
 
         String tanggal_tarik = et_tanggal_tarik.getText().toString().trim();
-        String id_user = et_id_user.getText().toString().trim();
+        final String id_user = et_id_user.getText().toString().trim();
         String nama_user = spinnernama.getSelectedItem().toString().trim();
         String jumlah_tarik = et_jumlah_tarik.getText().toString().trim();
         String saldo_user = et_saldo.getText().toString().trim();
         String keterangan = et_keterangan.getText().toString().trim();
 
-        Call<TransaksiTarik> call = apiInterface.insertTransaksiTarik(key, tanggal_tarik, id_user, nama_user, saldo_user, jumlah_tarik, keterangan);
-        call.enqueue(new Callback<TransaksiTarik>() {
-            @Override
-            public void onResponse(Call<TransaksiTarik> call, Response<TransaksiTarik> response) {
-                progressDialog.dismiss();
+        int uangawal = Integer.parseInt(saldo_user);
+        int uangakhir = Integer.parseInt(jumlah_tarik);
+        final int total = (uangawal - uangakhir);
 
-                Log.i(TambahTransaksiTarik.class.getSimpleName(), response.toString());
+        if (total >= 0){
+            Log.e("hasil ", String.valueOf(total));
+            Call<TransaksiTarik> call = apiInterface.insertTransaksiTarik(key, tanggal_tarik, id_user, nama_user, saldo_user, jumlah_tarik, keterangan);
+            call.enqueue(new Callback<TransaksiTarik>() {
+                @Override
+                public void onResponse(Call<TransaksiTarik> call, Response<TransaksiTarik> response) {
+                    progressDialog.dismiss();
 
-                String value = response.body().getValue();
-                String message = response.body().getMassage();
+                    Log.i(TambahTransaksiTarik.class.getSimpleName(), response.toString());
 
-                if (value.equals("1")){
-                    finish();
-                } else {
-                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                    String value = response.body().getValue();
+                    String message = response.body().getMassage();
+
+                    if (value.equals("1")){
+                        Toast.makeText(TambahTransaksiTarik.this, message, Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<TransaksiTarik> call, Throwable t) {
-                progressDialog.dismiss();
-                Toast.makeText(context, t.getMessage().toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<TransaksiTarik> call, Throwable t) {
+                    progressDialog.dismiss();
+                    Toast.makeText(context, t.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            Call<User> userCall = apiInterfaceUser.updateSaldo(key, id_user, total);
+            userCall.enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    progressDialog.dismiss();
+
+                    Log.i(TambahTransaksiTarik.class.getSimpleName(), response.toString());
+
+                    String value = response.body().getValue();
+                    String message = response.body().getMassage();
+
+                    if (value.equals("1")){
+                        Toast.makeText(TambahTransaksiTarik.this, message, Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    progressDialog.dismiss();
+                    Toast.makeText(context, t.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            progressDialog.dismiss();
+            AlertDialog.Builder dialog = new AlertDialog.Builder(TambahTransaksiTarik.this);
+            dialog.setMessage("Jumlah Tarik Tidak Sesuai");
+            dialog.setPositiveButton("Yes" ,new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            dialog.show();
+        }
     }
 
     private void populate_spinner() {
-        String url = "http://192.168.1.6/Bank-Sampah/backend/tarik/spinner_getnamauser.php";
+        String url = "http://192.168.1.4/Bank-Sampah/backend/tarik/spinner_getnamauser.php";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new com.android.volley.Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

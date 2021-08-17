@@ -1,7 +1,5 @@
 package com.example.banksampah.ui.data_user;
 
-import com.example.banksampah.ui.sampah.Sampah;
-
 import java.util.List;
 
 import retrofit2.Call;
@@ -27,4 +25,10 @@ public interface ApiInterface {
             @Field("email") String email,
             @Field("saldo") String saldo,
             @Field("role") String role);
+
+    @FormUrlEncoded
+    @POST("updatesaldo.php")
+    Call<User> updateSaldo(@Field("key") String key,
+                           @Field("id") String id_user,
+                           @Field("saldo") int total);
 }

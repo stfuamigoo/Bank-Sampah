@@ -149,36 +149,43 @@ public class EditorTransaksiTarik extends AppCompatActivity {
         String keterangan = et_keterangan.getText().toString().trim();
         String jumlah_tarik = et_jumlah_tarik.getText().toString().trim();
 
-        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        int uangawal = Integer.parseInt(saldo_user);
+        int uangakhir = Integer.parseInt(jumlah_tarik);
+        int total = (uangawal - uangakhir);
 
-        Call<TransaksiTarik> call = apiInterface.updateTransaksiTarik(key, id, tanggal_tarik, nama_user, saldo_user, jumlah_tarik,keterangan);
+        if (total >= 0) {
+            Log.e("hasil ", String.valueOf(total));
+            apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
-        call.enqueue(new Callback<TransaksiTarik>() {
-            @Override
-            public void onResponse(Call<TransaksiTarik> call, Response<TransaksiTarik> response) {
+            Call<TransaksiTarik> call = apiInterface.updateTransaksiTarik(key, id, tanggal_tarik, nama_user, saldo_user, jumlah_tarik,keterangan);
 
-                progressDialog.dismiss();
+            call.enqueue(new Callback<TransaksiTarik>() {
+                @Override
+                public void onResponse(Call<TransaksiTarik> call, Response<TransaksiTarik> response) {
 
-                Log.i(EditorUser.class.getSimpleName(), response.toString());
+                    progressDialog.dismiss();
 
-                String value = response.body().getValue();
-                String message = response.body().getMassage();
+                    Log.i(EditorUser.class.getSimpleName(), response.toString());
 
-                if (value.equals("1")){
-                    Toast.makeText(EditorTransaksiTarik.this, message, Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(EditorTransaksiTarik.this, TransaksiTarikMain.class));
-                } else {
-                    Toast.makeText(EditorTransaksiTarik.this, message, Toast.LENGTH_SHORT).show();
+                    String value = response.body().getValue();
+                    String message = response.body().getMassage();
+
+                    if (value.equals("1")){
+                        Toast.makeText(EditorTransaksiTarik.this, message, Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(EditorTransaksiTarik.this, TransaksiTarikMain.class));
+                    } else {
+                        Toast.makeText(EditorTransaksiTarik.this, message, Toast.LENGTH_SHORT).show();
+                    }
+
                 }
 
-            }
-
-            @Override
-            public void onFailure(Call<TransaksiTarik> call, Throwable t) {
-                progressDialog.dismiss();
-                Toast.makeText(EditorTransaksiTarik.this, t.getMessage().toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<TransaksiTarik> call, Throwable t) {
+                    progressDialog.dismiss();
+                    Toast.makeText(EditorTransaksiTarik.this, t.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     private void setDataFromIntentExtra() {

@@ -4,7 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 class ApiClient {
-    private static final String BASE_URL = "http://192.168.1.6/Bank-Sampah/backend/tarik/";
+    private static final String BASE_URL = "http://192.168.1.4/Bank-Sampah/backend/tarik/";
     private static Retrofit retrofit;
 
     static Retrofit getApiClient(){
