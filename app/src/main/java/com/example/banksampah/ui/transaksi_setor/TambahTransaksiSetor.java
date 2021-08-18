@@ -3,7 +3,6 @@ package com.example.banksampah.ui.transaksi_setor;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,7 +14,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -23,10 +21,11 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.banksampah.R;
+import com.example.banksampah.ui.data_user.ApiClient;
+import com.example.banksampah.ui.data_user.ApiInterface;
+import com.example.banksampah.ui.data_user.User;
+import com.example.banksampah.ui.transaksi_tarik.TambahTransaksiTarik;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,56 +42,75 @@ import retrofit2.Response;
 
 import static android.R.layout.simple_spinner_item;
 
-public class TambahTransaksiSetor extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class TambahTransaksiSetor extends AppCompatActivity {
 
+    ArrayList<String> iduserList = new ArrayList<>();
     ArrayList<String> spinnernamaList = new ArrayList<>();
+    ArrayList<String> saldoList = new ArrayList<>();
+    ArrayList<String> idsampahList = new ArrayList<>();
     ArrayList<String> spinnerjenissampahList = new ArrayList<>();
     ArrayList<String> hargaList = new ArrayList<>();
-    ArrayList<String> jenissampahList = new ArrayList<>();
-    ArrayList<String> iduserList = new ArrayList<>();
-    ArrayList<String> idsampahList = new ArrayList<>();
+    ArrayList<String> satuanList = new ArrayList<>();
     ArrayAdapter<String> spinnernamaAdapter;
     ArrayAdapter<String> spinnerjenissampahAdapter;
 
     Spinner spinnernama, spinnerjenissampah;
-    EditText et_tanggalsetor, et_id_user, et_id_sampah, et_nama, et_jenissampah, et_harga, et_berat, et_total, et_keterangan;
-    Button btn_tambah,hitungtotal;
+    EditText et_tanggalsetor, et_id_user, et_id_sampah, et_harga, et_berat, et_total, et_keterangan, et_saldo, et_satuan;
+    Button btn_tambah, btn_hitungtotal;
     Context context;
     ApiInterfaceSetor apiInterface;
-    DatePickerDialog picker;
+    ApiInterface apiInterfaceUser;
     RequestQueue requestQueue;
     Calendar myCalendar = Calendar.getInstance();
-
-    private String tanggalsetor, id_user, id_sampah, nama, jenissampah, harga,berat, total, keterangan;
-    Integer hitung=0;
-    private int id;
+    String getBerat, getHarga;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_transaksi_setor);
 
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-
-        et_tanggalsetor = findViewById(R.id.et_tanggalsetor);
-        et_id_user = findViewById(R.id.et_id_user);
-        et_id_sampah = findViewById(R.id.et_id_sampah);
-        et_harga = findViewById(R.id.et_harga);
-        et_berat = findViewById(R.id.et_berat);
-        et_total = findViewById(R.id.et_total);
-        et_keterangan = findViewById(R.id.et_keterangan);
-        spinnernama = findViewById(R.id.et_spinnernama);
-        spinnerjenissampah = findViewById(R.id.et_spinnerjenissampah);
-        btn_tambah = findViewById(R.id.et_btn_tambah_setor);
-        hitungtotal = findViewById(R.id.hitungtotal);
+        et_tanggalsetor = findViewById(R.id.ets_tanggal_setor);
+        et_id_user = findViewById(R.id.ets_id_user);
+        spinnernama = findViewById(R.id.ets_spinnernama);
+        et_saldo = findViewById(R.id.ets_saldo);
+        et_id_sampah = findViewById(R.id.ets_id_sampah);
+        spinnerjenissampah = findViewById(R.id.ets_spinnersampah);
+        et_harga = findViewById(R.id.ets_hargasampah);
+        et_berat = findViewById(R.id.ets_berat);
+        et_total = findViewById(R.id.ets_total);
+        et_keterangan = findViewById(R.id.ets_keterangan);
+        et_satuan = findViewById(R.id.ets_satuan);
+        btn_tambah = findViewById(R.id.ets_btntambah);
+        btn_hitungtotal = findViewById(R.id.ets_btnhitungtotal);
         requestQueue = Volley.newRequestQueue(this);
 
-//        et_saldo.setFocusable(false);
-//        et_saldo.setFocusableInTouchMode(false);
-//        et_saldo.setClickable(false);
+        et_total.setText("0");
+
+        et_harga.setClickable(false);
+        et_harga.setFocusable(false);
+        et_harga.setFocusableInTouchMode(false);
+        et_satuan.setClickable(false);
+        et_satuan.setFocusable(false);
+        et_satuan.setFocusableInTouchMode(false);
+        et_saldo.setClickable(false);
+        et_saldo.setFocusable(false);
+        et_saldo.setFocusableInTouchMode(false);
+
+        btn_hitungtotal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getBerat = et_berat.getText().toString();
+                getHarga = et_harga.getText().toString();
+
+                if (getBerat.isEmpty()){
+                    et_berat.setError("Jumlah Tidak Boleh Kosong");
+                } else {
+                    int sethasil = Integer.parseInt(getBerat)*Integer.parseInt(getHarga);
+                    et_total.setText(String.valueOf(sethasil));
+                    Log.e("hasil", String.valueOf(sethasil));
+                }
+            }
+        });
 
         et_tanggalsetor.setFocusableInTouchMode(false);
         et_tanggalsetor.setFocusable(false);
@@ -107,36 +125,26 @@ public class TambahTransaksiSetor extends AppCompatActivity implements AdapterVi
 
         context = this;
         apiInterface = ApiClientSetor.getApiClient().create(ApiInterfaceSetor.class);
+        apiInterfaceUser = ApiClient.getApiClient().create(ApiInterface.class);
 
         btn_tambah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveData("insert");
-            }
-        });
-        hitungtotal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hitung=R.id.et_berat*R.id.et_harga;
+                String tanggal_setor = et_tanggalsetor.getText().toString();
+                String keterangan = et_keterangan.getText().toString();
+                if (tanggal_setor.isEmpty()){
+                    et_tanggalsetor.setError("Tanggal Setor Tidak Boleh Kosong");
+                } else if (keterangan.isEmpty()){
+                    et_keterangan.setError("Keterangan Tidak Boleh Kosong");
+                } else {
+                    saveData("insert");
+                }
             }
         });
 
         populate_spinner_nama();
         populate_spinner_jenissampah();
 
-        Intent intent = getIntent();
-        id = intent.getIntExtra("id", 0);
-        tanggalsetor = intent.getStringExtra("tanggalsetor");
-        id_user = intent.getStringExtra("id_user");
-        id_sampah = intent.getStringExtra("id_sampah");
-        nama = intent.getStringExtra("nama");
-        jenissampah = intent.getStringExtra("jenissampah");
-        harga = (intent.getStringExtra("harga"));
-        berat = (intent.getStringExtra("berat"));
-        total = intent.getStringExtra("total");
-        keterangan = intent.getStringExtra("keterangan");
-
-        setDataFromIntentExtra();
     }
 
     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -165,21 +173,24 @@ public class TambahTransaksiSetor extends AppCompatActivity implements AdapterVi
         progressDialog.setMessage("Saving...");
         progressDialog.show();
 
-        readMode();
-
         String tanggalsetor = et_tanggalsetor.getText().toString().trim();
         String id_user = et_id_user.getText().toString().trim();
-        String id_sampah = et_id_sampah.getText().toString().trim();
         String nama = spinnernama.getSelectedItem().toString().trim();
+        String saldo_user = et_saldo.getText().toString().trim();
+        String id_sampah = et_id_sampah.getText().toString().trim();
         String jenissampah = spinnerjenissampah.getSelectedItem().toString().trim();
+        String satuan = et_satuan.getText().toString().trim();
         String harga = et_harga.getText().toString().trim();
-        String berat = et_berat.getText().toString().trim();
+        String jumlah = et_berat.getText().toString().trim();
         String total = et_total.getText().toString().trim();
         String keterangan = et_keterangan.getText().toString().trim();
 
+        int saldoawal = Integer.parseInt(saldo_user);
+        int saldoakhir = Integer.parseInt(total);
+        int totall = saldoawal + saldoakhir;
         apiInterface = ApiClientSetor.getApiClient().create(ApiInterfaceSetor.class);
 
-        Call<TransaksiSetor> call = apiInterface.insertTransaksiSetor(key, tanggalsetor, id_user, id_sampah, nama, jenissampah, harga, berat, total, keterangan);
+        Call<TransaksiSetor> call = apiInterface.insertTransaksiSetor(key, tanggalsetor, id_user, nama, saldo_user, id_sampah, jenissampah, satuan, harga, jumlah, total, keterangan);
         call.enqueue(new Callback<TransaksiSetor>() {
             @Override
             public void onResponse(Call<TransaksiSetor> call, Response<TransaksiSetor> response) {
@@ -203,38 +214,36 @@ public class TambahTransaksiSetor extends AppCompatActivity implements AdapterVi
                 Toast.makeText(context, t.getMessage().toString(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
 
-    private void setDataFromIntentExtra() {
+        Call<User> userCall = apiInterfaceUser.updateSaldo(key, id_user, totall);
+        userCall.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                progressDialog.dismiss();
 
-        if (id != 0) {
+                Log.i(TambahTransaksiTarik.class.getSimpleName(), response.toString());
 
-            readMode();
-            getSupportActionBar().setTitle("Edit " + nama.toString());
+                String value = response.body().getValue();
+                String message = response.body().getMassage();
 
-            et_tanggalsetor.setText(tanggalsetor);
-            et_id_user.setText(id_user);
-            et_id_sampah.setText(id_sampah);
-            et_nama.setText(nama);
-            et_jenissampah.setText(jenissampah);
-            et_harga.setText(harga);
-            et_berat.setText(berat);
-            et_total.setText(total);
-            et_keterangan.setText(keterangan);
+                if (value.equals("1")){
+                    Toast.makeText(TambahTransaksiSetor.this, message, Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                }
+            }
 
-            RequestOptions requestOptions = new RequestOptions();
-            requestOptions.skipMemoryCache(true);
-            requestOptions.diskCacheStrategy(DiskCacheStrategy.NONE);
-            requestOptions.placeholder(R.drawable.bg);
-            requestOptions.error(R.drawable.bg);
-
-        } else {
-            getSupportActionBar().setTitle("Add a Setor");
-        }
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(context, t.getMessage().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void populate_spinner_nama() {
-        String url = "https://4e02fb7b82af.ngrok.io/Bank-Sampah/backend/setor/spinner_getnamauser.php";
+        String url = "http://192.168.1.4/Bank-Sampah/backend/setor/spinner_getnamauser.php";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new com.android.volley.Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -244,9 +253,9 @@ public class TambahTransaksiSetor extends AppCompatActivity implements AdapterVi
                         JSONObject object = array.getJSONObject(i);
                         String iduser = object.optString("id");
                         String nama = object.optString("nama");
-//                        String saldo = object.optString("saldo");
+                        String saldo = object.optString("saldo");
                         spinnernamaList.add(nama);
-//                        saldoList.add(saldo);
+                        saldoList.add(saldo);
                         iduserList.add(iduser);
                         spinnernamaAdapter = new ArrayAdapter<>(TambahTransaksiSetor.this, simple_spinner_item, spinnernamaList);
                         spinnernamaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -263,11 +272,24 @@ public class TambahTransaksiSetor extends AppCompatActivity implements AdapterVi
             }
         });
         requestQueue.add(jsonObjectRequest);
-        spinnernama.setOnItemSelectedListener(this);
+        spinnernama.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedIduser = iduserList.get(position).toString();
+                String selectedSaldo = saldoList.get(position).toString();
+                et_id_user.setText(selectedIduser);
+                et_saldo.setText(selectedSaldo);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void populate_spinner_jenissampah() {
-        String url = "https://4e02fb7b82af.ngrok.io/Bank-Sampah/backend/setor/spinner_getsampah.php";
+        String url = "http://192.168.1.4/Bank-Sampah/backend/setor/spinner_getsampah.php";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new com.android.volley.Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -278,12 +300,12 @@ public class TambahTransaksiSetor extends AppCompatActivity implements AdapterVi
                         String idsampah = object.optString("id");
                         String jenissampah = object.optString("jenissampah");
                         String harga = object.optString("harga");
-//                        String saldo = object.optString("saldo");
+                        String satuan = object.optString("satuan");
                         spinnerjenissampahList.add(jenissampah);
+                        satuanList.add(satuan);
                         hargaList.add(harga);
-//                        saldoList.add(saldo);
                         idsampahList.add(idsampah);
-                        spinnerjenissampahAdapter = new ArrayAdapter<>(TambahTransaksiSetor.this, simple_spinner_item, spinnernamaList);
+                        spinnerjenissampahAdapter = new ArrayAdapter<>(TambahTransaksiSetor.this, simple_spinner_item, spinnerjenissampahList);
                         spinnerjenissampahAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spinnerjenissampah.setAdapter(spinnerjenissampahAdapter);
                     }
@@ -298,49 +320,21 @@ public class TambahTransaksiSetor extends AppCompatActivity implements AdapterVi
             }
         });
         requestQueue.add(jsonObjectRequest);
-        spinnerjenissampah.setOnItemSelectedListener(this);
-    }
+        spinnerjenissampah.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedIdsampah = idsampahList.get(position).toString();
+                String selectedharga = hargaList.get(position).toString();
+                String selectedsatuan = satuanList.get(position).toString();
+                et_id_sampah.setText(selectedIdsampah);
+                et_harga.setText(selectedharga);
+                et_satuan.setText(selectedsatuan);
+            }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//        String selectedSaldo = saldoList.get(position).toString();
-        String selectedIduser = iduserList.get(position).toString();
-        String selectedIdsampah = idsampahList.get(position).toString();
-//        String selectedjenissampah = jenissampahList.get(position).toString();
-        String selectedharga = hargaList.get(position).toString();
-//        et_saldo.setText(selectedSaldo);
-        et_id_user.setText(selectedIduser);
-        et_id_sampah.setText(selectedIdsampah);
-//        et_jenissampah.setText(selectedjenissampah);
-        et_harga.setText(selectedharga);
-    }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    void readMode(){
-
-        et_tanggalsetor.setFocusableInTouchMode(false);
-        et_id_user.setFocusableInTouchMode(false);
-        et_id_sampah.setFocusableInTouchMode(false);
-        et_nama.setFocusableInTouchMode(false);
-        et_jenissampah.setFocusableInTouchMode(false);
-        et_harga.setFocusableInTouchMode(false);
-        et_berat.setFocusableInTouchMode(false);
-        et_total.setFocusableInTouchMode(false);
-        et_keterangan.setFocusableInTouchMode(false);
-
-        et_tanggalsetor.setFocusable(false);
-        et_id_user.setFocusable(false);
-        et_id_sampah.setFocusable(false);
-        et_nama.setFocusable(false);
-        et_jenissampah.setFocusable(false);
-        et_harga.setFocusable(false);
-        et_berat.setFocusable(false);
-        et_total.setFocusable(false);
-        et_keterangan.setFocusable(false);
-
+            }
+        });
     }
 }

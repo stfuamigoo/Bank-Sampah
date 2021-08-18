@@ -57,11 +57,13 @@ public class TransaksiSetorMain extends AppCompatActivity {
                 intent.putExtra("id",transaksiSetorList.get(position).getId());
                 intent.putExtra("tanggalsetor",transaksiSetorList.get(position).getTanggalsetor());
                 intent.putExtra("id_user",transaksiSetorList.get(position).getId_user());
-                intent.putExtra("id_sampah",transaksiSetorList.get(position).getId_sampah());
                 intent.putExtra("nama",transaksiSetorList.get(position).getNama());
+                intent.putExtra("saldo_user",transaksiSetorList.get(position).getSaldo_user());
+                intent.putExtra("id_sampah",transaksiSetorList.get(position).getId_sampah());
                 intent.putExtra("jenissampah",transaksiSetorList.get(position).getJenissampah());
+                intent.putExtra("satuan",transaksiSetorList.get(position).getSatuan());
                 intent.putExtra("harga",transaksiSetorList.get(position).getHarga());
-                intent.putExtra("berat",transaksiSetorList.get(position).getBerat());
+                intent.putExtra("jumlah",transaksiSetorList.get(position).getJumlah());
                 intent.putExtra("total",transaksiSetorList.get(position).getTotal());
                 intent.putExtra("keterangan",transaksiSetorList.get(position).getKeterangan());
                 startActivity(intent);

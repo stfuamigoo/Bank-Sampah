@@ -30,5 +30,5 @@ public interface ApiInterface {
     @POST("updatesaldo.php")
     Call<User> updateSaldo(@Field("key") String key,
                            @Field("id") String id_user,
-                           @Field("saldo") int total);
+                           @Field("saldo") int saldo);
 }

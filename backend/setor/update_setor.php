@@ -10,23 +10,23 @@ if ( $key == "update" ){
 
     $id         = $_POST['id'];
     $tanggalsetor       = $_POST['tanggalsetor'];
-    $id_user    = $_POST['id_user'];
-    $id_sampah      = $_POST['id_sampah'];
     $nama      = $_POST['nama'];
+    $saldo_user      = $_POST['saldo_user'];
     $jenissampah      = $_POST['jenissampah'];
+    $satuan     = $_POST['satuan'];
     $harga    = $_POST['harga'];
-    $berat     = $_POST['berat'];
+    $jumlah    = $_POST['jumlah'];
     $total    = $_POST['total'];
     $keterangan    = $_POST['keterangan'];
 
     $query = "UPDATE setor SET 
     tanggalsetor='$tanggalsetor',
-    id_user='$id_user',
-    id_sampah='$id_sampah', 
     nama='$nama', 
+    saldo_user='$saldo_user',
     jenissampah='$jenissampah',
-    hargasampah='$hargasampah',
-    beratsampah='$beratsampah',
+    satuan='$satuan',
+    harga='$harga',
+    jumlah='$jumlah',
     total='$total',
     keterangan='$keterangan'
     WHERE id='$id' ";

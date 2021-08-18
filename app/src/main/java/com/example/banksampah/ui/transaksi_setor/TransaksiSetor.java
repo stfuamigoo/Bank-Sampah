@@ -13,12 +13,16 @@ public class TransaksiSetor {
     private String id_sampah;
     @SerializedName("nama")
     private String nama;
+    @SerializedName("saldo_user")
+    private String saldo_user;
     @SerializedName("jenissampah")
     private String jenissampah;
+    @SerializedName("satuan")
+    private String satuan;
     @SerializedName("harga")
     private String harga;
-    @SerializedName("berat")
-    private String berat;
+    @SerializedName("jumlah")
+    private String jumlah;
     @SerializedName("total")
     private String total;
     @SerializedName("keterangan")
@@ -68,6 +72,14 @@ public class TransaksiSetor {
         this.nama = nama;
     }
 
+    public String getSaldo_user() {
+        return saldo_user;
+    }
+
+    public void setSaldo_user(String saldo_user) {
+        this.saldo_user = saldo_user;
+    }
+
     public String getJenissampah() {
         return jenissampah;
     }
@@ -84,12 +96,12 @@ public class TransaksiSetor {
         this.harga = harga;
     }
 
-    public String getBerat() {
-        return berat;
+    public String getJumlah() {
+        return jumlah;
     }
 
-    public void setBerat(String berat) {
-        this.berat = berat;
+    public void setJumlah(String jumlah) {
+        this.jumlah = jumlah;
     }
 
     public String getTotal() {
@@ -108,7 +120,13 @@ public class TransaksiSetor {
         this.keterangan = keterangan;
     }
 
+    public String getSatuan() {
+        return satuan;
+    }
 
+    public void setSatuan(String satuan) {
+        this.satuan = satuan;
+    }
 
     public String getValue() {
         return value;

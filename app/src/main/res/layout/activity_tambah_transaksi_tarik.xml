@@ -162,7 +162,8 @@
                 android:fontFamily="@font/gotham_bold"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:id="@+id/ett_btntambah"/>
+                android:id="@+id/ett_btntambah"
+                android:layout_marginBottom="20dp"/>
 
             <EditText
                 android:layout_width="match_parent"

@@ -17,11 +17,13 @@ public interface ApiInterfaceSetor {
             @Field("key") String key,
             @Field("tanggalsetor") String tanggalsetor,
             @Field("id_user") String id_user,
-            @Field("id_sampah") String id_sampah,
             @Field("nama") String nama,
+            @Field("saldo_user") String saldo_user,
+            @Field("id_sampah") String id_sampah,
             @Field("jenissampah") String jenissampah,
+            @Field("satuan") String satuan,
             @Field("harga") String harga,
-            @Field("berat") String berat,
+            @Field("jumlah") String jumlah,
             @Field("total") String total,
             @Field("keterangan") String keterangan);
 
@@ -31,12 +33,12 @@ public interface ApiInterfaceSetor {
             @Field("key") String key,
             @Field("id") int id,
             @Field("tanggalsetor") String tanggalsetor,
-//            @Field("id_user") String id_user,
-//            @Field("id_sampah") String id_sampah,
             @Field("nama") String nama,
+            @Field("saldo_user") String saldo_user,
             @Field("jenissampah") String jenissampah,
+            @Field("satuan") String satuan,
             @Field("harga") String harga,
-            @Field("berat") String berat,
+            @Field("jumlah") String jumlah,
             @Field("total") String total,
             @Field("keterangan") String keterangan);
 }

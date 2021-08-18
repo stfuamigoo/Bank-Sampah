@@ -6,11 +6,13 @@ $key = $_POST['key'];
 
     $tanggalsetor       = $_POST['tanggalsetor'];
     $id_user    = $_POST['id_user'];
-    $id_sampah      = $_POST['id_sampah'];
     $nama      = $_POST['nama'];
+    $saldo_user      = $_POST['saldo_user'];
+    $id_sampah      = $_POST['id_sampah'];
     $jenissampah      = $_POST['jenissampah'];
+    $satuan     = $_POST['satuan'];
     $harga    = $_POST['harga'];
-    $berat     = $_POST['berat'];
+    $jumlah     = $_POST['jumlah'];
     $total    = $_POST['total'];
     $keterangan    = $_POST['keterangan'];
 
@@ -18,8 +20,8 @@ if ( $key == "insert" ){
 
     $birth_newformat = date('Y-m-d', strtotime($tanggalsetor));
 
-    $query = "INSERT INTO setor (tanggalsetor, id_user, id_sampah, nama, jenissampah, harga, berat, total, keterangan)
-    VALUES ('$birth_newformat', '$id_user', '$id_sampah', '$nama', '$jenissampah', '$harga', '$berat', '$total', '$keterangan') ";
+    $query = "INSERT INTO setor (tanggalsetor, id_user, nama, saldo_user, id_sampah, jenissampah, satuan, harga, jumlah, total, keterangan)
+    VALUES ('$birth_newformat', '$id_user', '$nama', '$saldo_user', '$id_sampah', '$jenissampah', '$satuan', '$harga', '$jumlah', '$total', '$keterangan') ";
 
         if ( mysqli_query($conn, $query) ){
 

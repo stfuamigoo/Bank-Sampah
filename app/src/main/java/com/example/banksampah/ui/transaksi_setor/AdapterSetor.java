@@ -41,8 +41,8 @@ public class AdapterSetor extends RecyclerView.Adapter<AdapterSetor.ViewHolder> 
     @SuppressLint("CheckResult")
     @Override
     public void onBindViewHolder(@NonNull AdapterSetor.ViewHolder holder, int position) {
+        holder.txt_tanggal_setor.setText(transaksisetor.get(position).getTanggalsetor());
         holder.txt_nama.setText(transaksisetor.get(position).getNama());
-        holder.txt_jenissampah.setText(transaksisetor.get(position).getJenissampah());
         holder.txt_total.setText(transaksisetor.get(position).getTotal());
     }
 
@@ -63,13 +63,13 @@ public class AdapterSetor extends RecyclerView.Adapter<AdapterSetor.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private AdapterSetor.RecyclerViewClickListener mListener;
-        private TextView txt_nama, txt_jenissampah, txt_total;
+        private TextView txt_nama, txt_tanggal_setor, txt_total;
         private RelativeLayout mRowContainer;
 
         public ViewHolder(View itemView, AdapterSetor.RecyclerViewClickListener listener) {
             super(itemView);
             txt_nama = itemView.findViewById(R.id.nama);
-            txt_jenissampah = itemView.findViewById(R.id.jenissampah);
+            txt_tanggal_setor = itemView.findViewById(R.id.tanggal_setor);
             txt_total = itemView.findViewById(R.id.total);
             mRowContainer = itemView.findViewById(R.id.row_container_setor);
 

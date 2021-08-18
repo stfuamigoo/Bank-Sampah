@@ -130,10 +130,10 @@ public class TambahTransaksiTarik extends AppCompatActivity implements AdapterVi
 
         int uangawal = Integer.parseInt(saldo_user);
         int uangakhir = Integer.parseInt(jumlah_tarik);
-        final int total = (uangawal - uangakhir);
+        final int totall = (uangawal - uangakhir);
 
-        if (total >= 0){
-            Log.e("hasil ", String.valueOf(total));
+        if (totall >= 0){
+            Log.e("hasil ", String.valueOf(totall));
             Call<TransaksiTarik> call = apiInterface.insertTransaksiTarik(key, tanggal_tarik, id_user, nama_user, saldo_user, jumlah_tarik, keterangan);
             call.enqueue(new Callback<TransaksiTarik>() {
                 @Override
@@ -160,11 +160,12 @@ public class TambahTransaksiTarik extends AppCompatActivity implements AdapterVi
                 }
             });
 
-            Call<User> userCall = apiInterfaceUser.updateSaldo(key, id_user, total);
+            Call<User> userCall = apiInterfaceUser.updateSaldo(key, id_user, totall);
             userCall.enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
                     progressDialog.dismiss();
+                    Log.e("update saldo", String.valueOf(totall));
 
                     Log.i(TambahTransaksiTarik.class.getSimpleName(), response.toString());
 

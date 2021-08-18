@@ -15,11 +15,13 @@ while( $row = mysqli_fetch_assoc($result) ){
         'id'        =>$row['id'], 
         'tanggalsetor'      =>$row['tanggalsetor'],
         'id_user'      =>$row['id_user'],
-        'id_sampah'      =>$row['id_sampah'],
         'nama'      =>$row['nama'],
+        'saldo_user'      =>$row['saldo_user'],
+        'id_sampah'      =>$row['id_sampah'],
         'jenissampah'      =>$row['jenissampah'],
+        'satuan'      =>$row['satuan'],
         'harga'      =>$row['harga'], 
-        'berat'   =>$row['berat'],
+        'jumlah'   =>$row['jumlah'],
         'total'     =>$row['total'],
         'keterangan'    =>$row['keterangan'])
     );

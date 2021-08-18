@@ -4,8 +4,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClientSetor {
-    private static final String BASE_URL = "https://4e02fb7b82af.ngrok.io/Bank-Sampah/backend/setor/";
-    public static final String URL_DELETE_TRANSAKSI_SETOR = "https://4e02fb7b82af.ngrok.io/Bank-Sampah/backend/setor/delete_setor.php?id=";
+    private static final String BASE_URL = "http://192.168.1.4/Bank-Sampah/backend/setor/";
+    public static final String URL_DELETE_TRANSAKSI_SETOR = "http://192.168.1.4/Bank-Sampah/backend/setor/delete_setor.php?id=";
     private static Retrofit retrofit;
 
     static Retrofit getApiClient(){
