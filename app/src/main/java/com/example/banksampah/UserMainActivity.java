@@ -9,7 +9,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.banksampah.ui.histori_setor.HistoriSetor;
+import com.example.banksampah.ui.histori_setor.HistoriSetorMain;
 import com.example.banksampah.ui.histori_tarik.HistoriTarikMain;
 import com.example.banksampah.ui.sampah.user.UserSampahMain;
 
@@ -39,7 +39,7 @@ public class UserMainActivity extends AppCompatActivity {
         btn_historisetor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UserMainActivity.this, HistoriSetor.class);
+                Intent intent = new Intent(UserMainActivity.this, HistoriSetorMain.class);
                 startActivity(intent);
             }
         });

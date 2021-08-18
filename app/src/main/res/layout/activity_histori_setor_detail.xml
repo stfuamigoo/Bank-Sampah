@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.histori_setor.DetailHistoriSetor">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@color/colorPrimary"
+            android:id="@+id/rv1"/>
+
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:src="@drawable/transaksitarik"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:id="@+id/eu_gambar"/>
+
+        <TextView
+            android:id="@+id/judulsetor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/eu_gambar"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:fontFamily="@font/gotham_bold"
+            android:layout_marginTop="10dp"
+            android:textSize="20dp"
+            android:text="Detail Transaksi Setor"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etstxt_tanggal_setor"
+            android:text="Tanggal Setor"
+            android:layout_below="@id/rv1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/gothammedium"
+            android:textSize="16sp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etstxt_tanggal_setor"
+            android:layout_marginRight="20dp"
+            android:id="@+id/ets_tanggal_setor"
+            android:hint="Tanggal Setor"
+            android:fontFamily="@font/nunitosans_regular"
+            android:textColor="#000"
+            android:inputType="number"
+            android:layout_toRightOf="@id/ic_date"/>
+        <ImageView
+            android:src="@drawable/ic_date"
+            android:layout_gravity="center_vertical"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_below="@id/rv1"
+            android:layout_marginTop="47dp"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/ic_date"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etstxt_nama"
+            android:text="@string/nama"
+            android:layout_below="@id/ets_tanggal_setor"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/gothammedium"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/etstxt_nama"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/ets_spinnernama"
+            android:fontFamily="@font/nunitosans_regular" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etstxt_saldo"
+            android:text="@string/saldo"
+            android:layout_below="@id/ets_spinnernama"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/gothammedium"
+            android:textSize="16sp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etstxt_saldo"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/ets_saldo"
+            android:hint="@string/saldo"
+            android:fontFamily="@font/nunitosans_regular" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etstxt_spinnersampah"
+            android:text="Jenis Sampah"
+            android:layout_below="@id/ets_saldo"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/gothammedium"
+            android:textSize="16sp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/etstxt_spinnersampah"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/ets_spinnersampah"
+            android:fontFamily="@font/nunitosans_regular" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etstxt_satuan"
+            android:text="Satuan"
+            android:layout_below="@id/ets_spinnersampah"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/gothammedium"
+            android:textSize="16sp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etstxt_satuan"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/ets_satuan"
+            android:hint="Satuan"
+            android:fontFamily="@font/nunitosans_regular" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etstxt_hargasampah"
+            android:text="Harga"
+            android:layout_below="@id/ets_satuan"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/gothammedium"
+            android:textSize="16sp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etstxt_hargasampah"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/ets_hargasampah"
+            android:hint="Harga"
+            android:fontFamily="@font/nunitosans_regular" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etstxt_berat"
+            android:text="Jumlah"
+            android:layout_below="@id/ets_hargasampah"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/gothammedium"
+            android:textSize="16sp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etstxt_berat"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/ets_berat"
+            android:hint="Jumlah"
+            android:fontFamily="@font/nunitosans_regular"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etstxt_total"
+            android:text="Total"
+            android:layout_below="@id/ets_berat"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/gothammedium"
+            android:textSize="16sp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etstxt_total"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/ets_total"
+            android:hint="Total"
+            android:fontFamily="@font/nunitosans_regular"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etstxt_keterangan"
+            android:text="@string/keterangan"
+            android:layout_below="@id/ets_total"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/gothammedium"
+            android:textSize="16sp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etstxt_keterangan"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/ets_keterangan"
+            android:hint="@string/keterangan"
+            android:fontFamily="@font/nunitosans_regular"
+            android:inputType="text"
+            android:layout_marginBottom="40dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etstxt_keterangan"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/ets_id_user"
+            android:hint="@string/keterangan"
+            android:fontFamily="@font/nunitosans_regular"
+            android:inputType="text"
+            android:visibility="invisible"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etstxt_keterangan"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/ets_id_sampah"
+            android:hint="@string/keterangan"
+            android:fontFamily="@font/nunitosans_regular"
+            android:inputType="text"
+            android:visibility="invisible"/>
+
+    </RelativeLayout>
+</ScrollView>
