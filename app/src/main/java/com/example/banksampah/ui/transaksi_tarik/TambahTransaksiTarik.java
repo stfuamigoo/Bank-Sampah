@@ -138,12 +138,12 @@ public class TambahTransaksiTarik extends AppCompatActivity implements AdapterVi
         progressDialog.setMessage("Saving...");
         progressDialog.show();
 
-        String tanggal_tarik = et_tanggal_tarik.getText().toString().trim();
+        final String tanggal_tarik = et_tanggal_tarik.getText().toString().trim();
         final String id_user = et_id_user.getText().toString().trim();
-        String nama_user = spinnernama.getSelectedItem().toString().trim();
-        String jumlah_tarik = et_jumlah_tarik.getText().toString().trim();
-        String saldo_user = et_saldo.getText().toString().trim();
-        String keterangan = et_keterangan.getText().toString().trim();
+        final String nama_user = spinnernama.getSelectedItem().toString().trim();
+        final String jumlah_tarik = et_jumlah_tarik.getText().toString().trim();
+        final String saldo_user = et_saldo.getText().toString().trim();
+        final String keterangan = et_keterangan.getText().toString().trim();
 
         int uangawal = Integer.parseInt(saldo_user);
         int uangakhir = Integer.parseInt(jumlah_tarik);
@@ -156,7 +156,7 @@ public class TambahTransaksiTarik extends AppCompatActivity implements AdapterVi
                 @Override
                 public void onResponse(Call<TransaksiTarik> call, Response<TransaksiTarik> response) {
                     progressDialog.dismiss();
-
+                    Log.e("data binding ", tanggal_tarik+","+id_user+","+nama_user+","+saldo_user+","+jumlah_tarik+","+keterangan);
                     Log.i(TambahTransaksiTarik.class.getSimpleName(), response.toString());
 
                     String value = response.body().getValue();

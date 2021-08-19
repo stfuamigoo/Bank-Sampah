@@ -177,6 +177,7 @@ public class EditorTransaksiSetor extends AppCompatActivity {
         total = intent.getStringExtra("total");
         keterangan = intent.getStringExtra("keterangan");
 
+        Log.e("data binding ", id+","+tanggalsetor+","+id_user+","+nama+","+saldo+","+id_sampah+","+jenissampah+","+satuan+","+harga+","+jumlah+","+total+","+keterangan);
         setDataFromIntentExtra();
         editMode();
     }

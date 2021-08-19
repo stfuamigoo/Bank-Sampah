@@ -8,7 +8,7 @@ public class TransaksiTarik {
     @SerializedName("tanggal_tarik")
     private String tanggal_tarik;
     @SerializedName("id_user")
-    private int id_user;
+    private String id_user;
     @SerializedName("nama_user")
     private String nama_user;
     @SerializedName("saldo_user")
@@ -70,11 +70,11 @@ public class TransaksiTarik {
         this.massage = massage;
     }
 
-    public int getId_user() {
+    public String getId_user() {
         return id_user;
     }
 
-    public void setId_user(int id_user) {
+    public void setId_user(String id_user) {
         this.id_user = id_user;
     }
 

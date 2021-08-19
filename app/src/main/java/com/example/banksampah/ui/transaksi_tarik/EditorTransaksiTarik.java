@@ -114,6 +114,8 @@ public class EditorTransaksiTarik extends AppCompatActivity {
         jumlah_tarik = intent.getStringExtra("jumlah_tarik");
         keterangan = intent.getStringExtra("keterangan");
 
+        Log.e("data binding ", id+","+tanggal_tarik+","+id_user+","+nama_user+","+saldo_user+","+jumlah_tarik+","+keterangan);
+
         setDataFromIntentExtra();
         editMode();
     }
@@ -170,7 +172,7 @@ public class EditorTransaksiTarik extends AppCompatActivity {
         String id_user = et_id_user.getText().toString().trim();
         String saldo_user = et_saldo.getText().toString().trim();
         final int saldo = Integer.parseInt(saldo_user);
-
+        Log.e("data binding ", id+","+tanggal_tarik+","+id_user+","+nama_user+","+saldo_user+","+jumlah_tarik+","+keterangan);
         Call<User> userCall = apiInterfaceUser.updateSaldo(key, id_user, saldo);
         userCall.enqueue(new Callback<User>() {
             @Override
@@ -204,12 +206,12 @@ public class EditorTransaksiTarik extends AppCompatActivity {
 
         readMode();
 
-        String tanggal_tarik = et_tanggal_tarik.getText().toString().trim();
-        String nama_user = et_nama_user.getText().toString().trim();
-        String saldo_user = et_saldo.getText().toString().trim();
-        String keterangan = et_keterangan.getText().toString().trim();
-        String jumlah_tarik = et_jumlah_tarik.getText().toString().trim();
-        String id_user = et_id_user.getText().toString().trim();
+        final String tanggal_tarik = et_tanggal_tarik.getText().toString().trim();
+        final String nama_user = et_nama_user.getText().toString().trim();
+        final String saldo_user = et_saldo.getText().toString().trim();
+        final String keterangan = et_keterangan.getText().toString().trim();
+        final String jumlah_tarik = et_jumlah_tarik.getText().toString().trim();
+        final String id_user = et_id_user.getText().toString().trim();
 
         int uangawal = Integer.parseInt(saldo_user);
         int uangakhir = Integer.parseInt(jumlah_tarik);
@@ -222,6 +224,7 @@ public class EditorTransaksiTarik extends AppCompatActivity {
                 public void onResponse(Call<TransaksiTarik> call, Response<TransaksiTarik> response) {
 
                     progressDialog.dismiss();
+                    Log.e("save saldo ", String.valueOf(saldo));
 
                     Log.i(EditorTransaksiTarik.class.getSimpleName(), response.toString());
 
@@ -249,8 +252,8 @@ public class EditorTransaksiTarik extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
                     progressDialog.dismiss();
-                    Log.e("update saldo", String.valueOf(saldo));
-
+                    Log.e("update saldo", String.valueOf(saldo)+","+id_user);
+                    Log.e("data binding ", id+","+tanggal_tarik+","+id_user+","+nama_user+","+saldo_user+","+jumlah_tarik+","+keterangan);
                     Log.i(EditorTransaksiSetor.class.getSimpleName(), response.toString());
 
                     String value = response.body().getValue();
