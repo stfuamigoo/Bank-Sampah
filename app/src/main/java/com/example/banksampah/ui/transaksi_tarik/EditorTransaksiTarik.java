@@ -1,6 +1,7 @@
 package com.example.banksampah.ui.transaksi_tarik;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,44 +11,36 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.banksampah.R;
-import com.example.banksampah.ui.data_user.DataUserMain;
 import com.example.banksampah.ui.data_user.EditorUser;
 import com.example.banksampah.ui.data_user.User;
 import com.example.banksampah.ui.sampah.RequestHandler;
+import com.example.banksampah.ui.transaksi_setor.EditorTransaksiSetor;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static android.R.layout.simple_spinner_item;
 
 public class EditorTransaksiTarik extends AppCompatActivity {
     EditText et_jumlah_tarik, et_keterangan, et_tanggal_tarik, et_saldo, et_id_user, et_nama_user;
     Button button_ubah, button_hapus;
     private int id;
     String tanggal_tarik, id_user, jumlah_tarik, keterangan, saldo_user, nama_user;
-    com.example.banksampah.ui.transaksi_tarik.ApiInterface apiInterface;
+    ApiInterface apiInterface;
+    com.example.banksampah.ui.data_user.ApiInterface apiInterfaceUser;
+    Calendar calendar = Calendar.getInstance();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +54,9 @@ public class EditorTransaksiTarik extends AppCompatActivity {
         et_keterangan = findViewById(R.id.ett_keterangan);
         button_ubah = findViewById(R.id.ett_btnubah);
         button_hapus = findViewById(R.id.ett_btnhapus);
+
+        apiInterfaceUser = com.example.banksampah.ui.data_user.ApiClient.getApiClient().create(com.example.banksampah.ui.data_user.ApiInterface.class);
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
         button_ubah.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +91,17 @@ public class EditorTransaksiTarik extends AppCompatActivity {
             }
         });
 
+        et_tanggal_tarik.setFocusableInTouchMode(false);
+        et_tanggal_tarik.setFocusable(false);
+        et_tanggal_tarik.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(EditorTransaksiTarik.this, date, calendar
+                        .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
         Intent intent = getIntent();
         id = intent.getIntExtra("id", 0);
         tanggal_tarik = intent.getStringExtra("tanggal_tarik");
@@ -108,7 +115,28 @@ public class EditorTransaksiTarik extends AppCompatActivity {
         editMode();
     }
 
-    private void deleteData(String delete, int id) {
+    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            // TODO Auto-generated method stub
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, monthOfYear);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            setBirth();
+        }
+
+    };
+
+    private void setBirth() {
+        String myFormat = "dd MMMM yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        et_tanggal_tarik.setText(sdf.format(calendar.getTime()));
+    }
+
+    private void deleteData(String key, int id) {
         class deleteData extends AsyncTask<Void,Void,String> {
 
             ProgressDialog progressDialog;
@@ -133,6 +161,38 @@ public class EditorTransaksiTarik extends AppCompatActivity {
                 return rh.sendGetRequestParam(ApiClient.URL_DELETE_TRANSAKSI_TARIK, String.valueOf(EditorTransaksiTarik.this.id));
             }
         }
+
+        String id_user = et_id_user.getText().toString().trim();
+        String saldo_user = et_saldo.getText().toString().trim();
+        String jumlah_tarik = et_jumlah_tarik.getText().toString().trim();
+
+        final int saldo = Integer.parseInt(saldo_user) + Integer.parseInt(jumlah_tarik);
+
+        Call<User> userCall = apiInterfaceUser.updateSaldo(key, id_user, saldo);
+        userCall.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                Log.e("update saldo", String.valueOf(saldo));
+
+                Log.i(EditorTransaksiTarik.class.getSimpleName(), response.toString());
+
+                String value = response.body().getValue();
+                String message = response.body().getMassage();
+
+                if (value.equals("1")){
+                    Toast.makeText(EditorTransaksiTarik.this, message, Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(EditorTransaksiTarik.this, message, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
+
         new deleteData().execute();
     }
 
@@ -148,17 +208,14 @@ public class EditorTransaksiTarik extends AppCompatActivity {
         String saldo_user = et_saldo.getText().toString().trim();
         String keterangan = et_keterangan.getText().toString().trim();
         String jumlah_tarik = et_jumlah_tarik.getText().toString().trim();
+        String id_user = et_id_user.getText().toString().trim();
 
         int uangawal = Integer.parseInt(saldo_user);
         int uangakhir = Integer.parseInt(jumlah_tarik);
-        int total = (uangawal - uangakhir);
+        final int saldo = (uangawal - uangakhir);
 
-        if (total >= 0) {
-            Log.e("hasil ", String.valueOf(total));
-            apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-
-            Call<TransaksiTarik> call = apiInterface.updateTransaksiTarik(key, id, tanggal_tarik, nama_user, saldo_user, jumlah_tarik,keterangan);
-
+        if (saldo >= 0) {
+            Call<TransaksiTarik> call = apiInterface.updateTransaksiTarik(key, id, tanggal_tarik, nama_user, saldo_user, jumlah_tarik, keterangan);
             call.enqueue(new Callback<TransaksiTarik>() {
                 @Override
                 public void onResponse(Call<TransaksiTarik> call, Response<TransaksiTarik> response) {
@@ -185,6 +242,44 @@ public class EditorTransaksiTarik extends AppCompatActivity {
                     Toast.makeText(EditorTransaksiTarik.this, t.getMessage().toString(), Toast.LENGTH_SHORT).show();
                 }
             });
+
+            Call<User> userCall = apiInterfaceUser.updateSaldo(key, id_user, saldo);
+            userCall.enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    progressDialog.dismiss();
+
+                    Log.i(EditorTransaksiTarik.class.getSimpleName(), response.toString());
+
+                    String value = response.body().getValue();
+                    String message = response.body().getMassage();
+                    Log.e("update saldo", String.valueOf(saldo)+","+value+","+message);
+
+                    if (value.equals("1")){
+                        Toast.makeText(EditorTransaksiTarik.this, message, Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(EditorTransaksiTarik.this, message, Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    progressDialog.dismiss();
+                    Toast.makeText(EditorTransaksiTarik.this, t.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            progressDialog.dismiss();
+            AlertDialog.Builder dialog = new AlertDialog.Builder(EditorTransaksiTarik.this);
+            dialog.setMessage("Data Gagal Terupdate");
+            dialog.setPositiveButton("Yes" ,new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            dialog.show();
         }
     }
 

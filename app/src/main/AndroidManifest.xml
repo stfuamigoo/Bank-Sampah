@@ -35,16 +35,16 @@
         <activity android:name=".ui.sampah.EditorSampah" />
         <activity android:name=".ui.data_user.DataUserMain"/>
         <activity android:name=".ui.data_user.EditorUser"/>
-        <activity android:name=".ui.transaksi_tarik.TransaksiTarikMain"/>
-        <activity android:name=".ui.transaksi_tarik.TambahTransaksiTarik"/>
-        <activity android:name=".ui.transaksi_tarik.EditorTransaksiTarik"/>
-        <activity android:name=".ui.transaksi_setor.TransaksiSetorMain">
+        <activity android:name=".ui.transaksi_tarik.TransaksiTarikMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.transaksi_tarik.TambahTransaksiTarik"/>
+        <activity android:name=".ui.transaksi_tarik.EditorTransaksiTarik"/>
+        <activity android:name=".ui.transaksi_setor.TransaksiSetorMain"/>
         <activity android:name=".ui.transaksi_setor.TambahTransaksiSetor"></activity>
         <activity android:name=".ui.transaksi_setor.EditorTransaksiSetor"></activity>
         <activity

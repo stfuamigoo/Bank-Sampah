@@ -26,13 +26,16 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.banksampah.R;
 import com.example.banksampah.ui.data_user.User;
+import com.example.banksampah.ui.transaksi_setor.TambahTransaksiSetor;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,7 +56,7 @@ public class TambahTransaksiTarik extends AppCompatActivity implements AdapterVi
     ApiInterface apiInterface;
     com.example.banksampah.ui.data_user.ApiInterface apiInterfaceUser;
     DatePickerDialog picker;
-    Calendar calendar;
+    Calendar calendar = Calendar.getInstance();
     RequestQueue requestQueue;
 
     @Override
@@ -77,20 +80,14 @@ public class TambahTransaksiTarik extends AppCompatActivity implements AdapterVi
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         apiInterfaceUser = com.example.banksampah.ui.data_user.ApiClient.getApiClient().create(com.example.banksampah.ui.data_user.ApiInterface.class);
 
+        et_tanggal_tarik.setFocusableInTouchMode(false);
+        et_tanggal_tarik.setFocusable(false);
         et_tanggal_tarik.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calendar = Calendar.getInstance();
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-                int month = calendar.get(Calendar.MONTH);
-                int year = calendar.get(Calendar.YEAR);
-                picker = new DatePickerDialog(TambahTransaksiTarik.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        et_tanggal_tarik.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
-                    }
-                }, year, month, day);
-                picker.show();
+                new DatePickerDialog(TambahTransaksiTarik.this, date, calendar
+                        .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
@@ -116,6 +113,27 @@ public class TambahTransaksiTarik extends AppCompatActivity implements AdapterVi
         populate_spinner();
     }
 
+    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            // TODO Auto-generated method stub
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, monthOfYear);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            setBirth();
+        }
+
+    };
+
+    private void setBirth() {
+        String myFormat = "dd MMMM yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        et_tanggal_tarik.setText(sdf.format(calendar.getTime()));
+    }
+
     private void saveData(final String key) {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Saving...");
@@ -130,10 +148,10 @@ public class TambahTransaksiTarik extends AppCompatActivity implements AdapterVi
 
         int uangawal = Integer.parseInt(saldo_user);
         int uangakhir = Integer.parseInt(jumlah_tarik);
-        final int totall = (uangawal - uangakhir);
+        final int saldo = (uangawal - uangakhir);
 
-        if (totall >= 0){
-            Log.e("hasil ", String.valueOf(totall));
+        if (saldo >= 0){
+            Log.e("hasil ", String.valueOf(saldo));
             Call<TransaksiTarik> call = apiInterface.insertTransaksiTarik(key, tanggal_tarik, id_user, nama_user, saldo_user, jumlah_tarik, keterangan);
             call.enqueue(new Callback<TransaksiTarik>() {
                 @Override
@@ -160,12 +178,12 @@ public class TambahTransaksiTarik extends AppCompatActivity implements AdapterVi
                 }
             });
 
-            Call<User> userCall = apiInterfaceUser.updateSaldo(key, id_user, totall);
+            Call<User> userCall = apiInterfaceUser.updateSaldo(key, id_user, saldo);
             userCall.enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
                     progressDialog.dismiss();
-                    Log.e("update saldo", String.valueOf(totall));
+                    Log.e("update saldo", String.valueOf(saldo));
 
                     Log.i(TambahTransaksiTarik.class.getSimpleName(), response.toString());
 

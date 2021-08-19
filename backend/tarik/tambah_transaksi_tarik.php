@@ -12,9 +12,10 @@ $jumlah_tarik      = $_POST['jumlah_tarik'];
 $keterangan     = $_POST['keterangan'];
 
 if ( $key == "insert" ){
+    $birth_newformat = date('Y-m-d', strtotime($tanggal_tarik));
 
     $query = "INSERT INTO tarik (tanggal_tarik, id_user, nama_user, saldo_user, jumlah_tarik, keterangan)
-    VALUES ('$tanggal_tarik', '$id_user', '$nama_user', '$saldo_user', '$jumlah_tarik', '$keterangan') ";
+    VALUES ('$birth_newformat', '$id_user', '$nama_user', '$saldo_user', '$jumlah_tarik', '$keterangan') ";
 
         if ( mysqli_query($con, $query) ){
             $response["value"] = "1";

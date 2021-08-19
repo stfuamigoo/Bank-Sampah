@@ -25,9 +25,7 @@ if( $key == "insert") {
         echo json_encode($response);
 		mysqli_close($con);
 	}
-}
-
-if( $key == "update") {
+} else if( $key == "update") {
     $id = $_POST['id'];
 	$saldo = $_POST['saldo'];
 
@@ -49,9 +47,7 @@ if( $key == "update") {
         echo json_encode($response);
 		mysqli_close($con);
 	}
-}
-
-if( $key == "delete") {
+} else if( $key == "delete") {
     $id = $_POST['id'];
 	$saldo = $_POST['saldo'];
 
