@@ -18,6 +18,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.banksampah.MainActivity;
 import com.example.banksampah.R;
 import com.example.banksampah.ui.sampah.EditorSampah;
 import com.example.banksampah.ui.sampah.MainSampah;
@@ -143,5 +144,12 @@ public class DataUserMain extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getUser();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 }

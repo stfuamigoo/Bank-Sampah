@@ -22,6 +22,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.banksampah.MainActivity;
 import com.example.banksampah.R;
 
 import java.util.List;
@@ -150,5 +151,12 @@ public class TransaksiTarikMain extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getUser();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 }

@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.banksampah.MainActivity;
 import com.example.banksampah.R;
 
 import java.util.List;
@@ -148,5 +149,12 @@ public class MainSampah extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getSampah();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 }
