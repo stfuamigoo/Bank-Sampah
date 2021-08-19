@@ -23,7 +23,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
     List<TransaksiSetor> transaksisetor, transaksisetorFilter;
     private Context context;
     private RecyclerViewClickListener mListener;
-    com.example.banksampah.ui.histori_setor.CustomFilter filter;
+    CustomFilter filter;
 
     public Adapter(List<TransaksiSetor> transaksisetor, Context context, RecyclerViewClickListener listener){
         this.transaksisetor = transaksisetor;
@@ -43,7 +43,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.txt_tanggal_tarik.setText(transaksisetor.get(position).getTanggalsetor());
-        holder.txt_jumlah_tarik.setText(transaksisetor.get(position).getJumlah());
+        holder.txt_jumlah_tarik.setText(transaksisetor.get(position).getTotal());
     }
 
     @Override

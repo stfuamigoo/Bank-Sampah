@@ -43,6 +43,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
     public void onBindViewHolder(@NonNull Adapter.ViewHolder holder, int position) {
         holder.txt_tanggal_tarik.setText(transaksitarik.get(position).getTanggal_tarik());
         holder.txt_jumlah_tarik.setText(transaksitarik.get(position).getJumlah_tarik());
+        holder.txt_nama.setText(transaksitarik.get(position).getNama_user());
     }
 
     @Override
@@ -66,13 +67,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private RecyclerViewClickListener mListener;
-        private TextView txt_tanggal_tarik, txt_jumlah_tarik;
+        private TextView txt_tanggal_tarik, txt_jumlah_tarik, txt_nama;
         private RelativeLayout mRowContainer;
 
         public ViewHolder(View itemView, RecyclerViewClickListener listener) {
             super(itemView);
             txt_tanggal_tarik = itemView.findViewById(R.id.tanggal_tarik);
             txt_jumlah_tarik = itemView.findViewById(R.id.jumlah_tarik);
+            txt_nama = itemView.findViewById(R.id.nama);
             mRowContainer = itemView.findViewById(R.id.row_transaksi_tarik);
 
             mListener = listener;

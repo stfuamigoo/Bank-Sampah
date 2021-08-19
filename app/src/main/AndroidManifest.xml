@@ -19,48 +19,46 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/appicon_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light"
+        android:theme="@style/AppTheme"
         android:networkSecurityConfig="@xml/network_sequrity_config">
-        <activity android:name=".splashscreen"/>
-        <activity android:name=".Home" />
-        <activity android:name=".Login" />
-        <activity android:name=".Register" />
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity android:name=".ui.sampah.MainSampah"/>
-        <activity android:name=".ui.sampah.TambahSampah" />
-        <activity android:name=".ui.sampah.EditorSampah" />
-        <activity android:name=".ui.data_user.DataUserMain"/>
-        <activity android:name=".ui.data_user.EditorUser"/>
-        <activity android:name=".ui.transaksi_tarik.TransaksiTarikMain">
+        <activity android:name=".splashscreen" android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.transaksi_tarik.TambahTransaksiTarik"/>
+        <activity android:name=".Home" android:label="Home"/>
+        <activity android:name=".Login" android:label="Login"/>
+        <activity android:name=".Register" android:label="Daftar"/>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main">
+        </activity>
+        <activity android:name=".ui.sampah.MainSampah" android:label="Data Sampah"/>
+        <activity android:name=".ui.sampah.TambahSampah" android:label="Tambah Data Sampah"/>
+        <activity android:name=".ui.sampah.EditorSampah" />
+        <activity android:name=".ui.data_user.DataUserMain" android:label="Data User"/>
+        <activity android:name=".ui.data_user.EditorUser"/>
+        <activity android:name=".ui.transaksi_tarik.TransaksiTarikMain" android:label="Transaksi Tarik"/>
+        <activity android:name=".ui.transaksi_tarik.TambahTransaksiTarik" android:label="Tambah Transaksi Tarik"/>
         <activity android:name=".ui.transaksi_tarik.EditorTransaksiTarik"/>
-        <activity android:name=".ui.transaksi_setor.TransaksiSetorMain"/>
-        <activity android:name=".ui.transaksi_setor.TambahTransaksiSetor"></activity>
+        <activity android:name=".ui.transaksi_setor.TransaksiSetorMain" android:label="Transaksi Setor"/>
+        <activity android:name=".ui.transaksi_setor.TambahTransaksiSetor" android:label="Tambah Transaksi Setor"></activity>
         <activity android:name=".ui.transaksi_setor.EditorTransaksiSetor"></activity>
         <activity
             android:name=".UserMainActivity"
-            android:label="@string/title_activity_user"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.histori_tarik.HistoriTarikMain"/>
+            android:label="@string/title_activity_user"/>
+        <activity android:name=".ui.histori_tarik.HistoriTarikMain" android:label="Histori Tarik"/>
         <activity android:name=".ui.histori_tarik.DetailHistoriTarik"/>
-        <activity android:name=".ui.histori_setor.HistoriSetorMain"/>
+        <activity android:name=".ui.histori_setor.HistoriSetorMain" android:label="Histori Setor"/>
         <activity android:name=".ui.histori_setor.DetailHistoriSetor"/>
-        <activity android:name=".ui.sampah.user.UserSampahMain"/>
+        <activity android:name=".ui.sampah.user.UserSampahMain" android:label="Data Sampah"/>
         <activity android:name=".ui.sampah.user.DetailSampah"/>
-        <activity android:name=".Profile"/>
-        <activity android:name=".UserProfile"/>
-        <activity android:name=".About"/>
-        <activity android:name=".Contact"/>
+        <activity android:name=".Profile" android:label="Profile"/>
+        <activity android:name=".UserProfile" android:label="Data Diri"/>
+        <activity android:name=".About" android:label="Tentang Kami"/>
+        <activity android:name=".Contact" android:label="Kontak"/>
 
         <uses-library
             android:name="org.apache.http.legacy"

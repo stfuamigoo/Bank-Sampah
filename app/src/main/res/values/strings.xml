@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Bank Sampah</string>
     <string name="penjelasan_tertarik">Bank Sampah Muda Karya adalah organisasi peduli lingkungan yang berlokasi di Balai Warga Rw 001 Kelurahan Pondok Cabe Ilir kecamatan Pamulang Kota Tangerang Selatan. Selain bidang bank sampah kami juga berfokus pada pengelolaan sampah, seperti komposting berbasis sampah, kerajinan berbahan baku sampah, dan masih banyak lagi program yang kami kembangkan. Saat ini bank sampah muda karya melayani warga pondok cabe ilir khususnya RW.001 yang berjumlah lebih dari 100 kepala keluarga. Hal itu menunjukan bahwa warga masyarakat perumahan pondok cabe ilir sangat antusias dengan adanya program ini, dan tentu bank sampah muda karya mendapatkan perhatian khusus dari warga sekitar. Jika Anda berminat untuk bergabung, silahkan ikuti langkah berikut ini.</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_user">UserMainActivity</string>
+    <string name="title_activity_main">Dashboard Admin</string>
+    <string name="title_activity_user">Dashboard Nasabah</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>

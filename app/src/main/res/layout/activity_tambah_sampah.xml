@@ -130,7 +130,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Save"
-                    app:showAsAction="always"></Button>
+                    app:showAsAction="always"
+                    android:background="@drawable/round_btn"
+                    android:fontFamily="@font/gotham_bold"
+                    android:textColor="@color/white"></Button>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

@@ -37,7 +37,7 @@ if( $key == "insert") {
 	//Meng-update Database
 	if(mysqli_query($con,$sql)){
 		$result["value"] = "1";
-        $result["message"] = "Success";
+        $result["message"] = "Success update";
     
         echo json_encode($result);
         mysqli_close($con);

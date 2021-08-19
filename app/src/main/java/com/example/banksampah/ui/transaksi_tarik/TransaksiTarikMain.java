@@ -3,7 +3,9 @@ package com.example.banksampah.ui.transaksi_tarik;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.style.TypefaceSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,12 +18,11 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.banksampah.R;
-import com.example.banksampah.ui.data_user.DataUserMain;
-import com.example.banksampah.ui.data_user.User;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class TransaksiTarikMain extends AppCompatActivity {
     private RecyclerView.LayoutManager manager;
     private Adapter adapter;
     private List<TransaksiTarik> transaksiTarikList;
-    ApiInterface apiInterface;
+    ApiInterfaceTarik apiInterfaceTarik;
     Adapter.RecyclerViewClickListener listener;
     ProgressBar bar;
     Button btn_tambah;
@@ -52,7 +53,7 @@ public class TransaksiTarikMain extends AppCompatActivity {
             }
         });
 
-        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        apiInterfaceTarik = ApiClientTarik.getApiClient().create(ApiInterfaceTarik.class);
 
         bar = findViewById(R.id.progress);
         recyclerView = findViewById(R.id.rvtransaksitarik);
@@ -124,7 +125,7 @@ public class TransaksiTarikMain extends AppCompatActivity {
 
     public void getUser(){
 
-        Call<List<TransaksiTarik>> call = apiInterface.getTransaksiTarik();
+        Call<List<TransaksiTarik>> call = apiInterfaceTarik.getTransaksiTarik();
         call.enqueue(new Callback<List<TransaksiTarik>>() {
             @Override
             public void onResponse(Call<List<TransaksiTarik>> call, Response<List<TransaksiTarik>> response) {

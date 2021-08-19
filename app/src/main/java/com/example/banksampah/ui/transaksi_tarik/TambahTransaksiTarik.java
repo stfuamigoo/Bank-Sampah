@@ -26,7 +26,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.banksampah.R;
 import com.example.banksampah.ui.data_user.User;
-import com.example.banksampah.ui.transaksi_setor.TambahTransaksiSetor;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,7 +52,7 @@ public class TambahTransaksiTarik extends AppCompatActivity implements AdapterVi
     EditText et_keterangan, et_jumlah_tarik, et_tanggal_tarik, et_saldo, et_id_user;
     Button btn_tambah;
     Context context;
-    ApiInterface apiInterface;
+    ApiInterfaceTarik apiInterfaceTarik;
     com.example.banksampah.ui.data_user.ApiInterface apiInterfaceUser;
     DatePickerDialog picker;
     Calendar calendar = Calendar.getInstance();
@@ -77,7 +76,7 @@ public class TambahTransaksiTarik extends AppCompatActivity implements AdapterVi
         et_saldo.setClickable(false);
 
         context = this;
-        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        apiInterfaceTarik = ApiClientTarik.getApiClient().create(ApiInterfaceTarik.class);
         apiInterfaceUser = com.example.banksampah.ui.data_user.ApiClient.getApiClient().create(com.example.banksampah.ui.data_user.ApiInterface.class);
 
         et_tanggal_tarik.setFocusableInTouchMode(false);
@@ -152,7 +151,7 @@ public class TambahTransaksiTarik extends AppCompatActivity implements AdapterVi
 
         if (saldo >= 0){
             Log.e("hasil ", String.valueOf(saldo));
-            Call<TransaksiTarik> call = apiInterface.insertTransaksiTarik(key, tanggal_tarik, id_user, nama_user, saldo_user, jumlah_tarik, keterangan);
+            Call<TransaksiTarik> call = apiInterfaceTarik.insertTransaksiTarik(key, tanggal_tarik, id_user, nama_user, saldo_user, jumlah_tarik, keterangan);
             call.enqueue(new Callback<TransaksiTarik>() {
                 @Override
                 public void onResponse(Call<TransaksiTarik> call, Response<TransaksiTarik> response) {
@@ -207,7 +206,7 @@ public class TambahTransaksiTarik extends AppCompatActivity implements AdapterVi
         } else {
             progressDialog.dismiss();
             AlertDialog.Builder dialog = new AlertDialog.Builder(TambahTransaksiTarik.this);
-            dialog.setMessage("Jumlah Tarik Tidak Sesuai");
+            dialog.setMessage("Jumlah Tarik Terlalu Besar");
             dialog.setPositiveButton("Yes" ,new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {

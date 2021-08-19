@@ -20,7 +20,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.banksampah.R;
-import com.example.banksampah.ui.data_user.EditorUser;
+import com.example.banksampah.ui.data_user.ApiClient;
+import com.example.banksampah.ui.data_user.ApiInterface;
 import com.example.banksampah.ui.data_user.User;
 import com.example.banksampah.ui.sampah.RequestHandler;
 import com.example.banksampah.ui.transaksi_setor.EditorTransaksiSetor;
@@ -38,9 +39,10 @@ public class EditorTransaksiTarik extends AppCompatActivity {
     Button button_ubah, button_hapus;
     private int id;
     String tanggal_tarik, id_user, jumlah_tarik, keterangan, saldo_user, nama_user;
-    ApiInterface apiInterface;
-    com.example.banksampah.ui.data_user.ApiInterface apiInterfaceUser;
+    ApiInterfaceTarik apiInterfaceTarik;
+    ApiInterface apiInterfaceUser;
     Calendar calendar = Calendar.getInstance();
+    Context context;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,8 +57,9 @@ public class EditorTransaksiTarik extends AppCompatActivity {
         button_ubah = findViewById(R.id.ett_btnubah);
         button_hapus = findViewById(R.id.ett_btnhapus);
 
-        apiInterfaceUser = com.example.banksampah.ui.data_user.ApiClient.getApiClient().create(com.example.banksampah.ui.data_user.ApiInterface.class);
-        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        context = this;
+        apiInterfaceUser = ApiClient.getApiClient().create(ApiInterface.class);
+        apiInterfaceTarik = ApiClientTarik.getApiClient().create(ApiInterfaceTarik.class);
 
         button_ubah.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,15 +161,15 @@ public class EditorTransaksiTarik extends AppCompatActivity {
             @Override
             protected String doInBackground(Void... voids) {
                 RequestHandler rh = new RequestHandler();
-                return rh.sendGetRequestParam(ApiClient.URL_DELETE_TRANSAKSI_TARIK, String.valueOf(EditorTransaksiTarik.this.id));
+                return rh.sendGetRequestParam(ApiClientTarik.URL_DELETE_TRANSAKSI_TARIK, String.valueOf(EditorTransaksiTarik.this.id));
             }
         }
 
+        new deleteData().execute();
+
         String id_user = et_id_user.getText().toString().trim();
         String saldo_user = et_saldo.getText().toString().trim();
-        String jumlah_tarik = et_jumlah_tarik.getText().toString().trim();
-
-        final int saldo = Integer.parseInt(saldo_user) + Integer.parseInt(jumlah_tarik);
+        final int saldo = Integer.parseInt(saldo_user);
 
         Call<User> userCall = apiInterfaceUser.updateSaldo(key, id_user, saldo);
         userCall.enqueue(new Callback<User>() {
@@ -174,7 +177,7 @@ public class EditorTransaksiTarik extends AppCompatActivity {
             public void onResponse(Call<User> call, Response<User> response) {
                 Log.e("update saldo", String.valueOf(saldo));
 
-                Log.i(EditorTransaksiTarik.class.getSimpleName(), response.toString());
+                Log.i(EditorTransaksiSetor.class.getSimpleName(), response.toString());
 
                 String value = response.body().getValue();
                 String message = response.body().getMassage();
@@ -183,7 +186,7 @@ public class EditorTransaksiTarik extends AppCompatActivity {
                     Toast.makeText(EditorTransaksiTarik.this, message, Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
-                    Toast.makeText(EditorTransaksiTarik.this, message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -192,8 +195,6 @@ public class EditorTransaksiTarik extends AppCompatActivity {
 
             }
         });
-
-        new deleteData().execute();
     }
 
     private void editData(final String key, final int id){
@@ -215,14 +216,14 @@ public class EditorTransaksiTarik extends AppCompatActivity {
         final int saldo = (uangawal - uangakhir);
 
         if (saldo >= 0) {
-            Call<TransaksiTarik> call = apiInterface.updateTransaksiTarik(key, id, tanggal_tarik, nama_user, saldo_user, jumlah_tarik, keterangan);
+            Call<TransaksiTarik> call = apiInterfaceTarik.updateTransaksiTarik(key, id, tanggal_tarik, nama_user, saldo_user, jumlah_tarik, keterangan);
             call.enqueue(new Callback<TransaksiTarik>() {
                 @Override
                 public void onResponse(Call<TransaksiTarik> call, Response<TransaksiTarik> response) {
 
                     progressDialog.dismiss();
 
-                    Log.i(EditorUser.class.getSimpleName(), response.toString());
+                    Log.i(EditorTransaksiTarik.class.getSimpleName(), response.toString());
 
                     String value = response.body().getValue();
                     String message = response.body().getMassage();
@@ -230,10 +231,10 @@ public class EditorTransaksiTarik extends AppCompatActivity {
                     if (value.equals("1")){
                         Toast.makeText(EditorTransaksiTarik.this, message, Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(EditorTransaksiTarik.this, TransaksiTarikMain.class));
+                        finish();
                     } else {
                         Toast.makeText(EditorTransaksiTarik.this, message, Toast.LENGTH_SHORT).show();
                     }
-
                 }
 
                 @Override
@@ -248,31 +249,31 @@ public class EditorTransaksiTarik extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
                     progressDialog.dismiss();
+                    Log.e("update saldo", String.valueOf(saldo));
 
-                    Log.i(EditorTransaksiTarik.class.getSimpleName(), response.toString());
+                    Log.i(EditorTransaksiSetor.class.getSimpleName(), response.toString());
 
                     String value = response.body().getValue();
                     String message = response.body().getMassage();
-                    Log.e("update saldo", String.valueOf(saldo)+","+value+","+message);
 
                     if (value.equals("1")){
                         Toast.makeText(EditorTransaksiTarik.this, message, Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
-                        Toast.makeText(EditorTransaksiTarik.this, message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
                     progressDialog.dismiss();
-                    Toast.makeText(EditorTransaksiTarik.this, t.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, t.getMessage().toString(), Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
             progressDialog.dismiss();
             AlertDialog.Builder dialog = new AlertDialog.Builder(EditorTransaksiTarik.this);
-            dialog.setMessage("Data Gagal Terupdate");
+            dialog.setMessage("Jumlah Tarik Terlalu Besar");
             dialog.setPositiveButton("Yes" ,new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -287,7 +288,7 @@ public class EditorTransaksiTarik extends AppCompatActivity {
         if (id != 0) {
 
             readMode();
-            getSupportActionBar().setTitle("Edit " + tanggal_tarik.toString());
+            getSupportActionBar().setTitle("Edit Transaksi " + nama_user.toString());
 
             et_tanggal_tarik.setText(tanggal_tarik);
             et_id_user.setText(id_user);
@@ -317,7 +318,8 @@ public class EditorTransaksiTarik extends AppCompatActivity {
     }
 
     private void editMode(){
-        et_tanggal_tarik.setFocusableInTouchMode(true);
+        et_tanggal_tarik.setFocusableInTouchMode(false);
+        et_tanggal_tarik.setFocusable(false);
         et_id_user.setFocusableInTouchMode(true);
         et_nama_user.setFocusableInTouchMode(true);
         et_saldo.setFocusableInTouchMode(true);

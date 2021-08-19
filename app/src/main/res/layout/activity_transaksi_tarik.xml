@@ -19,17 +19,19 @@
                 android:background="@android:color/white"
                 android:id="@+id/rvtransaksitarik"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="500dp"
                 android:layout_marginTop="20dp">
             </androidx.recyclerview.widget.RecyclerView>
 
             <Button
                 android:id="@+id/but"
-                android:text="Button"
+                android:text="Tambah"
                 android:background="@drawable/round_btn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/fab_margin"
+                android:textColor="@color/white"
+                android:fontFamily="@font/gotham_bold"
                 android:layout_gravity="center"></Button>
 
             <ProgressBar

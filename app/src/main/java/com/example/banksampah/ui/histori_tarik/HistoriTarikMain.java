@@ -44,6 +44,7 @@ public class HistoriTarikMain extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_histori_tarik);
+
         session = new SessionManager(this);
         session.checkloggin();
         HashMap<String, String> user = session.getUserDetail();

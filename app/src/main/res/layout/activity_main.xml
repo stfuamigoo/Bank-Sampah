@@ -5,19 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#186eb9"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Dashboard Admin"
-        android:layout_marginTop="10dp"
-        android:textColor="#fff"
-        android:fontFamily="@font/poppins_bold"
-        android:layout_marginLeft="30dp"
-        android:textSize="25dp"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -104,7 +91,7 @@
             android:id="@+id/btnprofile"
             android:background="@drawable/userlogo"
             android:layout_below="@id/text_menutransaksitarik"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="80dp"
             android:layout_marginLeft="250dp"/>
     </RelativeLayout>
 </RelativeLayout>

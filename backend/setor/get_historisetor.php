@@ -11,7 +11,7 @@ while($row = mysqli_fetch_assoc($result)){
     array_push($response,
     array(
         'id' => $row['id'],
-        'tanggal_setor' => $row['tanggal_setor'],
+        'tanggalsetor' => $row['tanggalsetor'],
         'id_user' => $row['id_user'],
         'nama' => $row['nama'],
         'saldo_user' => $row['saldo_user'],

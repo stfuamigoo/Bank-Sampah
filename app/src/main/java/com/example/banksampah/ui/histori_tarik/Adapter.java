@@ -35,7 +35,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_transaksi_tarik, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_histori_tarik, parent, false);
         return new ViewHolder(view, mListener);
     }
 
@@ -74,7 +74,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
             super(itemView);
             txt_tanggal_tarik = itemView.findViewById(R.id.tanggal_tarik);
             txt_jumlah_tarik = itemView.findViewById(R.id.jumlah_tarik);
-            mRowContainer = itemView.findViewById(R.id.row_transaksi_tarik);
+            mRowContainer = itemView.findViewById(R.id.row_histori_tarik);
 
             mListener = listener;
             mRowContainer.setOnClickListener(this);
@@ -83,7 +83,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.row_transaksi_tarik:
+                case R.id.row_histori_tarik:
                     mListener.onRowClick(mRowContainer, getAdapterPosition());
                     break;
                 default:

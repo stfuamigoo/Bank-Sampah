@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class CustomFilter extends Filter {
     ArrayList<TransaksiSetor> transaksisetorArrayList;
-    com.example.banksampah.ui.histori_setor.Adapter adapter;
+    Adapter adapter;
 
     public CustomFilter(ArrayList<TransaksiSetor> list, Adapter adapter) {
         this.adapter=adapter;
