@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2021 at 01:58 PM
+-- Generation Time: Aug 19, 2021 at 10:12 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.8
 
@@ -57,7 +57,7 @@ INSERT INTO `sampah` (`id`, `jenissampah`, `satuan`, `harga`, `keterangan`, `pic
 (15, 'Botol Warna', 'KG', '500', 'Semua Jenis Botol ', '/Bank-Sampah/backend/sampah/fotosampah/botolwarna.jpeg'),
 (16, 'Gelas Mineral Kotor', 'KG', '1500', 'Semua Jenis Gelas Mineral', '/Bank-Sampah/backend/sampah/fotosampah/gelaskotor.jpeg'),
 (17, 'Tutup Botol', 'KG', '1500', 'Semua Jenis Tutup Botol', '/Bank-Sampah/backend/sampah/fotosampah/tutupbotol.jpeg'),
-(18, 'Tutup Galon', 'KG', '2000', 'Semua Jenis Tutup Galon', '/Bank-Sampah/backend/sampah/fotosampah/tutupgalon.jpeg'),
+(18, 'Tutup Galon', 'KG', '2000', 'Semua Jenis Tutup Galon', '/Bank-Sampah/backend/sampah/fotosampah/tutupgalon.jpg'),
 (19, 'emberan ', 'KG', '1000', 'Semua Jenis Prabotan Plastik', '/Bank-Sampah/backend/sampah/fotosampah/mberan1.jpeg'),
 (20, 'Majalah', 'KG', '600', 'Semua Jenis Majalah', '/Bank-Sampah/backend/sampah/fotosampah/majalah.jpeg'),
 (21, 'Buku', 'KG', '1000', 'Semua Jenis Buku', '/Bank-Sampah/backend/sampah/fotosampah/buku.jpeg'),
@@ -65,7 +65,7 @@ INSERT INTO `sampah` (`id`, `jenissampah`, `satuan`, `harga`, `keterangan`, `pic
 (23, 'Botol Beling', 'PC', '100', 'Semua Jenis Botol Beling', '/Bank-Sampah/backend/sampah/fotosampah/botol.jpeg'),
 (24, 'Keping Cd', 'KG', '2500', 'Semua Jenis Keping Cd', '/Bank-Sampah/backend/sampah/fotosampah/kepingcd.jpeg'),
 (25, 'Minyak Curah', 'LT', '1000', 'Semua Jenis Minyak Jelanta', '/Bank-Sampah/backend/sampah/fotosampah/minyak.jpeg'),
-(26, 'Tali Besi', 'KG', '1000', 'Semua Jenis Besi', '/Bank-Sampah/backend/sampah/fotosampah/Seto.jpeg');
+(26, 'Tali Besi', 'KG', '1000', 'Semua Jenis Besi', '/Bank-Sampah/backend/sampah/fotosampah/talibesi.jpg');
 
 -- --------------------------------------------------------
 
@@ -93,8 +93,9 @@ CREATE TABLE `setor` (
 --
 
 INSERT INTO `setor` (`id`, `tanggalsetor`, `id_user`, `nama`, `saldo_user`, `id_sampah`, `jenissampah`, `satuan`, `harga`, `jumlah`, `total`, `keterangan`) VALUES
-(1, '2021-08-03', 14, 'ucup', 0, 2, 'Alumunium', 'KG', '6000', 2, 12000, '-'),
-(7, '2021-08-03', 14, 'ucup', 1000, 2, 'Alumunium', 'KG', '6000', 3, 18000, '-');
+(7, '2021-08-03', 14, 'ucup', 1000, 2, 'Alumunium', 'KG', '6000', 3, 18000, '-'),
+(8, '2021-08-02', 14, 'ucup', 0, 21, 'Buku', 'KG', '1000', 10, 10000, '-'),
+(9, '2021-08-04', 15, 'Audrey', 10000, 15, 'Botol Warna', 'KG', '500', 5, 2500, '-');
 
 -- --------------------------------------------------------
 
@@ -111,13 +112,6 @@ CREATE TABLE `tarik` (
   `jumlah_tarik` int(11) NOT NULL,
   `keterangan` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tarik`
---
-
-INSERT INTO `tarik` (`id`, `tanggal_tarik`, `id_user`, `nama_user`, `saldo_user`, `jumlah_tarik`, `keterangan`) VALUES
-(12, '2021-08-05', 14, 'ucup', 19000, 4000, '-');
 
 -- --------------------------------------------------------
 
@@ -144,8 +138,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `nik`, `password`, `nama`, `alamat`, `rt`, `telepon`, `email`, `saldo`, `role`) VALUES
 (1, 'admin', 'admin', 'admin', 'admin', '2', '123456789', 'admin@admin', 0, 'Admin'),
-(14, 'ucup', 'ucup', 'ucup', 'asdasd', '2', '12312', 'asdasdasd', 14000, 'Nasabah'),
-(15, '321', '321', 'Audrey', 'gang jambu', '2', '321123', 'audreyuyeee@gmail.com', 15000, 'Nasabah');
+(14, 'ucup', 'ucup', 'ucup', 'asdasd', '2', '12312', 'asdasdasd', 10000, 'Nasabah'),
+(15, '321', '321', 'Audrey', 'gang jambu', '2', '321123', 'audreyuyeee@gmail.com', 12500, 'Nasabah');
 
 --
 -- Indexes for dumped tables
@@ -192,13 +186,13 @@ ALTER TABLE `sampah`
 -- AUTO_INCREMENT for table `setor`
 --
 ALTER TABLE `setor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tarik`
 --
 ALTER TABLE `tarik`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `user`
