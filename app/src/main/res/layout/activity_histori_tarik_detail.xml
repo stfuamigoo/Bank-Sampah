@@ -21,7 +21,7 @@
             <ImageView
                 android:layout_width="160dp"
                 android:layout_height="160dp"
-                android:src="@drawable/transaksitarik"
+                android:src="@drawable/historitariklogo"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
                 android:id="@+id/eu_gambar"/>
@@ -54,12 +54,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/etttxt_tanggal_tarik"
-                android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:id="@+id/ett_tanggal_tarik"
                 android:hint="@string/tanggal_tarik"
                 android:fontFamily="@font/nunitosans_regular"
-                android:textColor="#000"/>
+                android:textColor="#000"
+                android:layout_toRightOf="@id/ic_date"/>
+            <ImageView
+                android:src="@drawable/ic_date"
+                android:layout_gravity="center_vertical"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_below="@id/rv1"
+                android:layout_marginTop="47dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/ic_date"/>
 
             <TextView
                 android:layout_width="match_parent"
